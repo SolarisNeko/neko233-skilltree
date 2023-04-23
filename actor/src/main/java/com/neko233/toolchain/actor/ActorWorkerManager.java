@@ -4,7 +4,7 @@ package com.neko233.toolchain.actor;
 import com.neko233.toolchain.actor.strategy.ActorIdStrategy;
 import com.neko233.toolchain.actor.strategy.ActorIdStrategyConstant;
 import com.neko233.toolchain.actor.strategy.ActorIdStrategyFactory;
-import com.neko233.toolchain.commons.core.lifecycle.GlobalLifeCycle;
+import com.neko233.toolchain.commons.api.lifecycle.LifeCycle;
 import lombok.extern.slf4j.Slf4j;
 
 import java.util.Optional;
@@ -15,7 +15,7 @@ import java.util.Optional;
  * {@link ActorApi 使用对象, 必须实现该 API}
  */
 @Slf4j
-public class ActorWorkerManager implements GlobalLifeCycle {
+public class ActorWorkerManager implements LifeCycle {
 
 
     public static final int Default_MQ_SIZE_1W = 10000;

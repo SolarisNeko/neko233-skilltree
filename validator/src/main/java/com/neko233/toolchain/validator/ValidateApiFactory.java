@@ -1,6 +1,6 @@
 package com.neko233.toolchain.validator;
 
-import com.neko233.toolchain.common.scanner.PackageScanner;
+import com.neko233.toolchain.commons.core.scanner.PackageScanner;
 import lombok.extern.slf4j.Slf4j;
 
 import java.lang.annotation.Annotation;

@@ -1,6 +1,7 @@
 package com.neko233.toolchain.i18n;
 
-import com.neko233.toolchain.common.base.MapUtils233;
+
+import com.neko233.toolchain.commons.core.base.MapUtils233;
 
 import java.util.Collection;
 import java.util.Collections;

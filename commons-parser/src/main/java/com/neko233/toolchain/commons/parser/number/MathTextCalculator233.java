@@ -1,7 +1,7 @@
 package com.neko233.toolchain.commons.parser.number;
 
 import com.alibaba.fastjson2.JSON;
-import com.neko233.toolchain.common.base.KvTemplate233;
+import com.neko233.toolchain.commons.core.base.KvTemplate233;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.collections4.CollectionUtils;
 import org.apache.commons.lang3.StringUtils;

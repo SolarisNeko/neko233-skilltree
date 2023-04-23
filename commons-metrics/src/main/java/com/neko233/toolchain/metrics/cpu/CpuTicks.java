@@ -1,13 +1,12 @@
 package com.neko233.toolchain.metrics.cpu;
 
 
-import com.neko233.toolchain.common.base.ThreadUtils233;
+import com.neko233.toolchain.commons.core.base.ThreadUtils233;
 
 /**
- * CPU负载时间信息
+ * CPU 负载时间信息
  *
  * @author looly
- * @since 5.7.12
  */
 public class CpuTicks {
 

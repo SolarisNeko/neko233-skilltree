@@ -1,7 +1,7 @@
 package com.neko233.toolchain.metrics.cpu;
 
 
-import com.neko233.toolchain.common.base.MathUtils233;
+import com.neko233.toolchain.commons.core.base.MathUtils233;
 
 import java.text.DecimalFormat;
 

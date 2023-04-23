@@ -3,7 +3,6 @@ package com.neko233.toolchain.commons.core.base;
 import com.neko233.toolchain.commons.core.annotation.NotThreadSafe;
 import com.neko233.toolchain.commons.core.file.FileUtils233;
 
-
 import java.util.Properties;
 
 

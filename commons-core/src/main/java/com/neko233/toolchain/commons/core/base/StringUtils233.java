@@ -68,6 +68,20 @@ public class StringUtils233 {
     private StringUtils233() {
     }
 
+    /**
+     * 安全 trim
+     *
+     * @param input 输入
+     * @return 内容
+     */
+    @NotNull
+    public static String trim(final String input) {
+        if (StringUtils233.isBlank(input)) {
+            return "";
+        }
+        return input.trim();
+    }
+
     public static boolean isEmpty(final char... cs) {
         return isEmpty(new String(cs));
     }

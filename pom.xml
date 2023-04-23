@@ -7,11 +7,11 @@
 
     <groupId>com.neko233</groupId>
     <artifactId>neko233-toolchain-all</artifactId>
-    <version>0.0.3</version>
+    <version>0.0.1</version>
 
 
-    <name>module-demo</name>
-    <url>https://github.com/SolarisNeko/module-demo/tree/main</url>
+    <name>neko233-toolchain-all</name>
+    <url>https://github.com/SolarisNeko/neko233-toolchain-all/tree/main</url>
     <modules>
         <!-- All -->
         <module>neko233-utils-all</module>
@@ -39,7 +39,8 @@
     </modules>
 
     <description>
-        module-demo is a test
+        neko233-toolchain-all is a tool box~
+        工具盒子~
 
     </description>
 
@@ -51,9 +52,9 @@
     </developers>
 
     <scm>
-        <connection>scm:git:https://github.com/SolarisNeko/module-demo.git</connection>
-        <developerConnection>scm:git:ssh://github.com/SolarisNeko/module-demo.git</developerConnection>
-        <url>http://github.com/SolarisNeko/module-demo/tree/main</url>
+        <connection>scm:git:https://github.com/SolarisNeko/neko233-toolchain-all.git</connection>
+        <developerConnection>scm:git:ssh://github.com/SolarisNeko/neko233-toolchain-all.git</developerConnection>
+        <url>http://github.com/SolarisNeko/neko233-toolchain-all/tree/main</url>
     </scm>
 
     <licenses>

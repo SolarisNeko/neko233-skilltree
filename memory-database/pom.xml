@@ -7,7 +7,7 @@
     <parent>
         <groupId>com.neko233</groupId>
         <artifactId>neko233-toolchain-all</artifactId>
-        <version>0.0.3</version>
+        <version>0.0.1</version>
     </parent>
 
     <artifactId>memory-database</artifactId>

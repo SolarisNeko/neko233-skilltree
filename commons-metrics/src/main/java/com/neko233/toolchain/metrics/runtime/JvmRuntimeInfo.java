@@ -1,14 +1,12 @@
 package com.neko233.toolchain.metrics.runtime;
 
 
-import com.neko233.toolchain.common.base.DataSizeUtils233;
+import com.neko233.toolchain.commons.core.base.DataSizeUtils233;
 
 import java.io.Serializable;
 
 /**
  * 运行时信息，包括内存总大小、已用大小、可用大小等
- *
- * @author looly
  */
 public class JvmRuntimeInfo implements Serializable {
 
