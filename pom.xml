@@ -6,7 +6,7 @@
     <packaging>pom</packaging>
 
     <groupId>com.neko233</groupId>
-    <artifactId>neko233-toolchain-all</artifactId>
+    <artifactId>neko233-skilltree</artifactId>
     <version>0.0.1</version>
 
 
@@ -14,27 +14,27 @@
     <url>https://github.com/SolarisNeko/neko233-toolchain-all/tree/main</url>
     <modules>
         <!-- All -->
-        <module>neko233-utils-all</module>
+        <module>skilltree-all</module>
 
         <!-- 通用层 -->
-        <module>commons-core</module>
-        <module>commons-sql</module>
-        <module>commons-api</module>
-        <module>commons-parser</module>
-        <module>commons-metrics</module>
-        <module>commons-reactive</module>
-        <module>commons-event-system</module>
-        <module>commons-storage</module>
+        <module>skilltree-commons-core</module>
+        <module>skilltree-commons-sql</module>
+        <module>skilltree-commons-api</module>
+        <module>skilltree-commons-parser</module>
+        <module>skilltree-commons-metrics</module>
+        <module>skilltree-commons-reactive</module>
+        <module>skilltree-commons-event-system</module>
+        <module>skilltree-commons-storage</module>
 
         <!-- 功能层 -->
-        <module>aop</module>
-        <module>actor</module>
-        <module>counter</module>
-        <module>id-generator</module>
-        <module>i18n</module>
-        <module>distribute-system</module>
-        <module>memory-database</module>
-        <module>validator</module>
+        <module>skilltree-aop</module>
+        <module>skilltree-actor</module>
+        <module>skilltree-counter</module>
+        <module>skilltree-id-generator</module>
+        <module>skilltree-i18n</module>
+        <module>skilltree-distribute-system</module>
+        <module>skilltree-memory-database</module>
+        <module>skilltree-validator</module>
 
     </modules>
 
@@ -75,7 +75,7 @@
 
         <gpg.executable>gpg</gpg.executable>
 
-        <Automatic-Module-Name>com.neko233</Automatic-Module-Name>
+<!--        <Automatic-Module-Name>com.neko233</Automatic-Module-Name>-->
 
         <!-- plugin -->
         <lombok.version>1.18.24</lombok.version>
@@ -142,7 +142,7 @@
         <dependency>
             <groupId>junit</groupId>
             <artifactId>junit</artifactId>
-            <version>4.12</version>
+            <version>4.13.1</version>
             <scope>test</scope>
         </dependency>
 
@@ -187,10 +187,23 @@
                 <artifactId>maven-compiler-plugin</artifactId>
                 <version>3.8.1</version>
                 <configuration>
-                    <source>${compile.version}</source>
-                    <target>${compile.version}</target>
-                    <compilerArgument>-Xlint:unchecked</compilerArgument>
+                    <encoding>UTF-8</encoding>
+                    <source>8</source>
+                    <target>8</target>
                 </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-source-plugin</artifactId>
+                <version>3.1.0</version>
+                <executions>
+                    <execution>
+                        <id>attach-sources</id>
+                        <goals>
+                            <goal>jar-no-fork</goal>
+                        </goals>
+                    </execution>
+                </executions>
             </plugin>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
@@ -207,7 +220,7 @@
                             <Built-By>${user.name}</Built-By>
                             <Build-Jdk>${java.version}</Build-Jdk>
                             <Build-Timestamp>${maven.build.timestamp}</Build-Timestamp>
-                            <Automatic-Module-Name>${Automatic-Module-Name}</Automatic-Module-Name>
+<!--                            <Automatic-Module-Name>${Automatic-Module-Name}</Automatic-Module-Name>-->
                         </manifestEntries>
                     </archive>
                 </configuration>
@@ -284,7 +297,8 @@
                         <version>1.6</version>
                         <executions>
                             <execution>
-                                <id>ossrh</id>
+<!--                                <id>ossrh</id>-->
+                                <id>sign-artifacts</id>
                                 <phase>verify</phase>
                                 <goals>
                                     <goal>sign</goal>
@@ -292,10 +306,11 @@
                             </execution>
                         </executions>
                     </plugin>
+
                     <plugin>
                         <groupId>org.sonatype.plugins</groupId>
                         <artifactId>nexus-staging-maven-plugin</artifactId>
-                        <version>1.6.8</version>
+                        <version>1.6.3</version>
                         <extensions>true</extensions>
                         <configuration>
                             <serverId>ossrh</serverId>
@@ -303,6 +318,7 @@
                             <autoReleaseAfterClose>true</autoReleaseAfterClose>
                         </configuration>
                     </plugin>
+
                 </plugins>
             </build>
         </profile>
