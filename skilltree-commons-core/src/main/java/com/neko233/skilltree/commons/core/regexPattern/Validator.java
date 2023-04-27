@@ -1,7 +1,6 @@
 package com.neko233.skilltree.commons.core.regexPattern;
 
 import com.neko233.skilltree.commons.core.base.*;
-import com.neko233.toolchain.commons.core.base.*;
 import com.neko233.skilltree.commons.core.business.CreditCodeUtil;
 import com.neko233.skilltree.commons.core.business.IdCardForChinaUtils;
 

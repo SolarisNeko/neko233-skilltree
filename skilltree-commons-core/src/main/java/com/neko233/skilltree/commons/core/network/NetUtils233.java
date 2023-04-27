@@ -4,7 +4,6 @@ package com.neko233.skilltree.commons.core.network;
 import com.neko233.skilltree.commons.core.base.*;
 import com.neko233.skilltree.commons.core.exception.IORuntimeException;
 import com.neko233.skilltree.commons.core.exception.UtilException;
-import com.neko233.toolchain.commons.core.base.*;
 import com.neko233.skilltree.commons.core.network.dto.UserPassAuthenticator;
 
 import javax.naming.NamingEnumeration;

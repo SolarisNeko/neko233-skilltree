@@ -1,7 +1,7 @@
 package com.neko233.skilltree.commons.core.cache.objects;
 
-import com.neko233.skilltree.commons.core.cache.objects.metrics.SimpleCacheMetrics;
 import com.neko233.skilltree.commons.core.cache.objects.metrics.CacheMetrics;
+import com.neko233.skilltree.commons.core.cache.objects.metrics.SimpleCacheMetrics;
 
 import java.util.Map;
 import java.util.concurrent.ConcurrentMap;
