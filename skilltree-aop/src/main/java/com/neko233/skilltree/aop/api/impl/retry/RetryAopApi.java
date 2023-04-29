@@ -1,6 +1,6 @@
-package com.neko233.skilltree.aop.impl;
+package com.neko233.skilltree.aop.api.impl.retry;
 
-import com.neko233.skilltree.aop.AopApi;
+import com.neko233.skilltree.aop.api.AopApi;
 
 import java.io.IOException;
 import java.lang.reflect.Method;
@@ -19,7 +19,7 @@ public class RetryAopApi implements AopApi {
     }
 
     @Override
-    public void destroy() {
+    public void finish() {
 
     }
 

@@ -7,6 +7,9 @@ import java.lang.annotation.*;
 @Retention(RetentionPolicy.RUNTIME)
 public @interface EventConsumer {
 
-    Class<?> value();
+    /**
+     * @return 监听的事件 []
+     */
+    Class<?>[] value();
 
 }

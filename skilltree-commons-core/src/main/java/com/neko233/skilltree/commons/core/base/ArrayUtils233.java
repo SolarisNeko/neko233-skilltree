@@ -118,9 +118,11 @@ public class ArrayUtils233 {
             return null;
         }
 
+        // reverse
         if (index < 0) {
             index += Array.getLength(array);
         }
+
         try {
             return (T) Array.get(array, index);
         } catch (ArrayIndexOutOfBoundsException e) {
@@ -128,6 +130,14 @@ public class ArrayUtils233 {
         }
     }
 
+
+    @SuppressWarnings("unchecked")
+    public static <T> T getByHuman(Object array, int humanIndex) {
+        if (array == null) {
+            return null;
+        }
+        return get(array, humanIndex - 1);
+    }
 
     /**
      * 生成一个从0开始的数字列表<br>

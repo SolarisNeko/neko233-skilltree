@@ -10,8 +10,8 @@ import lombok.Data;
 import lombok.extern.slf4j.Slf4j;
 
 import java.util.Collections;
+import java.util.List;
 import java.util.Map;
-import java.util.Set;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.Future;
 import java.util.concurrent.FutureTask;
@@ -32,7 +32,7 @@ public class EventDispatcher implements DispatcherApi {
     /**
      * k-v for dispatcher choose delegate chain .
      */
-    private final Map<String, Set<EventListener>> dispatcherMap = new ConcurrentHashMap<>();
+    private final Map<String, List<EventListener>> eventNameToHandlerMap = new ConcurrentHashMap<>();
     private ThreadPoolExecutor threadPool;
     private ThrowableHandler throwableHandler;
 
@@ -53,18 +53,19 @@ public class EventDispatcher implements DispatcherApi {
     /**
      * 委托执行
      *
-     * @param eventKey 唯一标识
-     * @param data     数据
+     * @param eventName 唯一标识
+     * @param data      数据
      */
     @Override
-    public void sync(String eventKey,
+    public void sync(String eventName,
                      Object data) {
-        notifyAllObserver(eventKey, data);
+        notifyAllObserver(eventName, data);
     }
 
-    private void notifyAllObserver(String key,
-                                   Object data) {
-        Set<EventListener> eventListeners = getObserverList(key);
+    private void notifyAllObserver(String eventName,
+                                   Object event) {
+
+        List<EventListener> eventListeners = getObserverList(eventName);
         if (CollectionUtils233.isEmpty(eventListeners)) {
             return;
         }
@@ -72,7 +73,7 @@ public class EventDispatcher implements DispatcherApi {
         for (EventListener eventListener : eventListeners) {
             // independent listener
             try {
-                eventListener.handle(data);
+                eventListener.handle(event);
             } catch (Throwable t) {
                 if (throwableHandler == null) {
                     return;
@@ -86,51 +87,60 @@ public class EventDispatcher implements DispatcherApi {
     /**
      * 异步执行
      *
-     * @param key  唯一标识
-     * @param data 任意数据
+     * @param eventName  唯一标识
+     * @param event 任意数据
      * @return Future
      */
     @Override
-    public Future<?> async(String key,
-                           Object data) {
+    public Future<?> async(String eventName,
+                           Object event) {
         if (threadPool == null) {
             log.error("[{}] your thread pool is null, please check.", EventDispatcher.class.getSimpleName());
             return new FutureTask<>(() -> null);
         }
-        return threadPool.submit(() -> sync(key, data));
+        return threadPool.submit(() -> sync(eventName, event));
     }
 
 
     /**
      * 注册 observer Manager 到 Dispatcher
      *
-     * @param key      唯一标识名
-     * @param observer 观察者
+     * @param eventName 唯一标识名
+     * @param observer  观察者
      * @return this
      */
     @Override
-    public synchronized EventDispatcher register(String key,
+    public synchronized EventDispatcher register(String eventName,
                                                  EventListener observer) {
-        dispatcherMap.merge(key, Collections.singleton(observer), (v1, v2) -> {
+        String realEventName = getRealEventName(eventName, observer);
+
+        eventNameToHandlerMap.merge(realEventName, Collections.singletonList(observer), (v1, v2) -> {
             v1.addAll(v2);
             return v1;
         });
         return this;
     }
 
+    private static String getRealEventName(String eventName, EventListener observer) {
+        if (observer == null) {
+            return "";
+        }
+        return eventName == null ? observer.getEventClassName() : eventName;
+    }
+
 
     /**
      * 取消注册
      *
-     * @param eventKey 唯一标识名
+     * @param eventName 唯一标识名
      * @return this
      */
     @Override
-    public synchronized EventDispatcher unregisterAll(String eventKey) {
-        if (StringUtils233.isBlank(eventKey)) {
+    public synchronized EventDispatcher unregisterAll(String eventName) {
+        if (StringUtils233.isBlank(eventName)) {
             return this;
         }
-        dispatcherMap.remove(eventKey);
+        eventNameToHandlerMap.remove(eventName);
         return this;
     }
 
@@ -142,7 +152,7 @@ public class EventDispatcher implements DispatcherApi {
      */
     public boolean addEventObserver(String eventKey,
                                     EventListener<?> eventListener) {
-        dispatcherMap.merge(eventKey, Collections.singleton(eventListener), (v1, v2) -> {
+        eventNameToHandlerMap.merge(eventKey, Collections.singletonList(eventListener), (v1, v2) -> {
             v1.addAll(v2);
             return v1;
         });
@@ -151,14 +161,16 @@ public class EventDispatcher implements DispatcherApi {
 
 
     /**
-     * @param eventKey      manager 的唯一标识
+     * @param eventName     事件名
      * @param eventListener 事件监听器
      * @return isOk?
      */
     @Override
-    public void unregisterListener(String eventKey,
-                                   EventListener eventListener) {
-        Set<EventListener> eventListeners = dispatcherMap.get(eventKey);
+    public void unregister(String eventName,
+                           EventListener eventListener) {
+        eventName = getRealEventName(eventName, eventListener);
+
+        List<EventListener> eventListeners = eventNameToHandlerMap.get(eventName);
         eventListeners.remove(eventListener);
     }
 
@@ -169,11 +181,11 @@ public class EventDispatcher implements DispatcherApi {
      * @param key 唯一标识
      * @return 管理器
      */
-    private Set<EventListener> getObserverList(String key) {
+    private List<EventListener> getObserverList(String key) {
         if (StringUtils233.isBlank(key)) {
             return null;
         }
-        return dispatcherMap.get(key);
+        return eventNameToHandlerMap.get(key);
     }
 
 }

@@ -1,5 +1,8 @@
-package com.neko233.skilltree.aop;
+package com.neko233.skilltree.aop.proxy.impl;
 
+import com.neko233.skilltree.aop.AopAnnotationRegistry233;
+import com.neko233.skilltree.aop.api.AopApi;
+import com.neko233.skilltree.aop.proxy.Aop;
 import lombok.extern.slf4j.Slf4j;
 
 import java.lang.annotation.Annotation;
@@ -11,9 +14,12 @@ import java.util.function.Supplier;
  * @author SolarisNeko on 2022-01-01
  */
 @Slf4j
-public class Aop233 {
+public class AopByJdk233 implements Aop {
 
-    public static <T> T proxy(T target, AopApi aopApi) {
+    public static final AopByJdk233 singleton = new AopByJdk233();
+
+    @Override
+    public <T> T proxyByApi(T target, AopApi aopApi) {
         if (target == null) {
             return null;
         }
@@ -25,6 +31,7 @@ public class Aop233 {
         // 定义一个 InvocationHandler
         InvocationHandler handler = (proxy, method, args) -> {
             aopApi.preHandle(method, target, args);
+
             Object returnValue = null;
             int retryCount = Math.max(0, aopApi.retryCountOnError());
             for (int tryCount = 0; tryCount < 1 + retryCount; tryCount++) {
@@ -39,6 +46,7 @@ public class Aop233 {
                     throw e.getCause();
                 }
             }
+
             aopApi.postHandle(method, target, args);
             return returnValue;
         };
@@ -46,7 +54,8 @@ public class Aop233 {
         return (T) Proxy.newProxyInstance(loader, interfaces, handler);
     }
 
-    public static <T> T proxyByAnnotation(T target) {
+    @Override
+    public <T> T proxyByAnnotation(T target) {
         if (target == null) {
             return null;
         }
@@ -60,7 +69,8 @@ public class Aop233 {
         Annotation[] annotations = clazz.getAnnotations();
         AopApi targetAopApi = null;
         for (Annotation annotation : annotations) {
-            Supplier<AopApi> aopApi = AopAnnotationFactory233.singleton.get(annotation);
+            Class<? extends Annotation> annoType = annotation.annotationType();
+            Supplier<AopApi> aopApi = AopAnnotationRegistry233.singleton.get(annoType);
             if (aopApi == null) {
                 continue;
             }
@@ -86,7 +96,7 @@ public class Aop233 {
                     if (isEat) {
                         continue;
                     }
-                    throw e.getCause();
+                    throw e;
                 }
             }
             finalTargetAopApi.postHandle(method, target, args);

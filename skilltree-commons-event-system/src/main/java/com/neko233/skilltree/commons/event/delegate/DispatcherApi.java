@@ -1,5 +1,7 @@
 package com.neko233.skilltree.commons.event.delegate;
 
+import com.neko233.skilltree.commons.core.annotation.Nullable;
+
 import java.util.concurrent.Future;
 import java.util.concurrent.FutureTask;
 
@@ -10,16 +12,16 @@ import java.util.concurrent.FutureTask;
 public interface DispatcherApi {
 
     default void sync(Object data) {
-        sync(data.getClass().getName(), data);
+        sync(null, data);
     }
 
     /**
      * 同步处理
      *
-     * @param eventId 事件ID
+     * @param eventName 事件ID
      * @param data    数据
      */
-    void sync(String eventId, Object data);
+    void sync(String eventName, Object data);
 
     default <T> Future<?> async(T object) {
         if (object == null) {
@@ -38,6 +40,13 @@ public interface DispatcherApi {
      */
     Future<?> async(String eventId, Object data);
 
+    /**
+     * 注册
+     *
+     * @param clazz    类
+     * @param listener 监听器
+     * @return this
+     */
     default <T> DispatcherApi register(Class<T> clazz, EventListener listener) {
         if (clazz == null) {
             return this;
@@ -48,11 +57,11 @@ public interface DispatcherApi {
     /**
      * 注册
      *
-     * @param eventId  事件ID
-     * @param listener 监听者
+     * @param eventName 事件ID
+     * @param listener  监听者
      * @return this
      */
-    DispatcherApi register(String eventId, EventListener listener);
+    DispatcherApi register(@Nullable String eventName, EventListener listener);
 
 
     default <T> DispatcherApi unregisterAll(Class<T> clazz) {
@@ -65,10 +74,10 @@ public interface DispatcherApi {
     /**
      * 取消注册某个事件
      *
-     * @param eventId 事件
+     * @param eventName 事件
      * @return this
      */
-    DispatcherApi unregisterAll(String eventId);
+    DispatcherApi unregisterAll(String eventName);
 
 
     /**
@@ -77,14 +86,14 @@ public interface DispatcherApi {
      * @param eventId       事件
      * @param eventListener 监听器
      */
-    void unregisterListener(String eventId, EventListener eventListener);
+    void unregister(String eventId, EventListener eventListener);
 
 
-    default <T> void unregisterListener(Class<T> clazz, EventListener eventListener) {
+    default <T> void unregister(Class<T> clazz, EventListener eventListener) {
         if (clazz == null) {
             return;
         }
-        unregisterListener(clazz.getName(), eventListener);
+        unregister(clazz.getName(), eventListener);
     }
 
 }

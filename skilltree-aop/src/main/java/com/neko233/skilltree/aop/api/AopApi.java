@@ -1,4 +1,4 @@
-package com.neko233.skilltree.aop;
+package com.neko233.skilltree.aop.api;
 
 import java.lang.reflect.Method;
 
@@ -12,9 +12,19 @@ public interface AopApi {
 
     // --------------- global 全剧相关 --------------
 
-    void init();
+    /**
+     * 初始化
+     */
+    default void init() {
 
-    void destroy();
+    }
+
+    /**
+     * 构造完成
+     */
+    default void finish() {
+
+    }
 
     // --------------- method invoke --------------
 
@@ -25,8 +35,7 @@ public interface AopApi {
      * @param target 调用对象
      * @param args   参数
      */
-    default void preHandle(Method method, Object target, Object[] args) {
-    }
+    void preHandle(Method method, Object target, Object[] args);
 
 
     default int retryCountOnError() {
@@ -47,8 +56,7 @@ public interface AopApi {
      * @param target 调用对象
      * @param args   参数
      */
-    default void postHandle(Method method, Object target, Object[] args) {
-    }
+    void postHandle(Method method, Object target, Object[] args);
 
 
 }

@@ -12,6 +12,7 @@
 
     <name>neko233-toolchain-all</name>
     <url>https://github.com/SolarisNeko/neko233-toolchain-all/tree/main</url>
+
     <modules>
         <!-- All -->
         <module>skilltree-all</module>
@@ -35,7 +36,6 @@
         <module>skilltree-distribute-system</module>
         <module>skilltree-memory-database</module>
         <module>skilltree-validator</module>
-
     </modules>
 
     <description>
