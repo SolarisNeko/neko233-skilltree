@@ -36,6 +36,7 @@
         <module>skilltree-distribute-system</module>
         <module>skilltree-memory-database</module>
         <module>skilltree-validator</module>
+        <module>skilltree-rank</module>
     </modules>
 
     <description>
