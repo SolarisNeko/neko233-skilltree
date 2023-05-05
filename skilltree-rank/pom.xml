@@ -25,6 +25,12 @@
     <dependencies>
 
         <dependency>
+            <groupId>io.lettuce</groupId>
+            <artifactId>lettuce-core</artifactId>
+            <version>5.1.8.RELEASE</version>
+        </dependency>
+
+        <dependency>
             <groupId>com.neko233</groupId>
             <artifactId>skilltree-commons-core</artifactId>
             <version>${project.parent.version}</version>
