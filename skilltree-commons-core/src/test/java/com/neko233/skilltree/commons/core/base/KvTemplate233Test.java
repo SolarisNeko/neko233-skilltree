@@ -21,7 +21,7 @@ public class KvTemplate233Test {
                 .put("city", "BlackHole")
                 .build();
 
-        Assert.assertEquals(build, "Hello, SolarisNeko! Welcome to BlackHole, SolarisNeko.");
+        Assert.assertEquals("Hello, SolarisNeko! Welcome to BlackHole, SolarisNeko.", build);
     }
 
 

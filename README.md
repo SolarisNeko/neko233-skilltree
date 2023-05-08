@@ -13,14 +13,14 @@ this is a skill tree to handle problem like eat sugar ~
 <dependency>
     <groupId>com.neko233</groupId>
     <artifactId>skilltree-all</artifactId>
-    <version>0.0.2</version>
+    <version>0.0.3</version>
 </dependency>
 ```
 
 ## Gradle
 
 ```kotlin
-implementation("com.neko233:skilltree-all:0.0.2")
+implementation("com.neko233:skilltree-all:0.0.3")
 ```
 
 # Module 模块

@@ -7,7 +7,7 @@
 
     <groupId>com.neko233</groupId>
     <artifactId>neko233-skilltree</artifactId>
-    <version>0.0.2</version>
+    <version>0.0.3</version>
 
 
     <name>neko233-toolchain-all</name>
@@ -36,12 +36,11 @@
         <module>skilltree-distribute-system</module>
         <module>skilltree-memory-database</module>
         <module>skilltree-validator</module>
-        <module>skilltree-rank</module>
     </modules>
 
     <description>
         neko233-toolchain-all is a tool box~
-        工具盒子~
+        技能树, 工具盒
 
     </description>
 
@@ -76,12 +75,15 @@
 
         <gpg.executable>gpg</gpg.executable>
 
-<!--        <Automatic-Module-Name>com.neko233</Automatic-Module-Name>-->
+        <!--        <Automatic-Module-Name>com.neko233</Automatic-Module-Name>-->
 
         <!-- plugin -->
         <lombok.version>1.18.24</lombok.version>
         <!-- Log -->
         <slf4j-api.version>1.7.36</slf4j-api.version>
+
+
+        <redis-lettuce.version>5.1.8.RELEASE</redis-lettuce.version>
     </properties>
 
     <dependencies>
@@ -221,7 +223,7 @@
                             <Built-By>${user.name}</Built-By>
                             <Build-Jdk>${java.version}</Build-Jdk>
                             <Build-Timestamp>${maven.build.timestamp}</Build-Timestamp>
-<!--                            <Automatic-Module-Name>${Automatic-Module-Name}</Automatic-Module-Name>-->
+                            <!--                            <Automatic-Module-Name>${Automatic-Module-Name}</Automatic-Module-Name>-->
                         </manifestEntries>
                     </archive>
                 </configuration>
@@ -298,7 +300,7 @@
                         <version>1.6</version>
                         <executions>
                             <execution>
-<!--                                <id>ossrh</id>-->
+                                <!--                                <id>ossrh</id>-->
                                 <id>sign-artifacts</id>
                                 <phase>verify</phase>
                                 <goals>

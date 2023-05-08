@@ -1,6 +1,5 @@
 package com.neko233.skilltree.commons.core.base;
 
-import java.lang.reflect.Type;
 import java.util.List;
 
 /**
@@ -19,7 +18,8 @@ public class ListUtils233 {
      * @param index 支持 +/- number
      * @return data
      */
-    public static <T> T get(List<T> list, int index) {
+    public static <T> T get(List<T> list,
+                            int index) {
         if (null == list) {
             return null;
         }
@@ -37,10 +37,12 @@ public class ListUtils233 {
      * @param humanIndex 从 1 开始
      * @return data
      */
-    public static Type getByHumanIndex(List<Type> list, int humanIndex) {
+    public static <T> T getByHumanIndex(List<T> list,
+                                        int humanIndex) {
         if (humanIndex == 0) {
             return get(list, 0);
         }
         return get(list, humanIndex - 1);
     }
+
 }

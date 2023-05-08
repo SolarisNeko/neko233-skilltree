@@ -20,7 +20,11 @@ public interface EventListener<T> {
     void handle(T event);
 
     default String getEventClassName() {
-        return ObjectTypeUtils233.getGenericClassNameByHumanIndex(this, 1);
+        Class<?> clazz = ObjectTypeUtils233.getGenericClassNameByHumanIndex(this, 1);
+        if (clazz == null) {
+            return "null";
+        }
+        return clazz.getName();
     }
 
 }

@@ -1,4 +1,4 @@
-package com.neko233.skilltree.commons.core.log;
+package com.neko233.skilltree.commons.core.text;
 
 import com.neko233.skilltree.commons.core.annotation.NotNull;
 import com.neko233.skilltree.commons.core.base.RegexUtils233;
@@ -22,7 +22,7 @@ import java.util.stream.Collectors;
  * Date on 2022-12-17
  */
 @Slf4j
-public class LogFormatUtil {
+public class TextFormatUtils233 {
 
     /**
      * 占位符格式. 格式 = ${英文+数字}
@@ -62,7 +62,7 @@ public class LogFormatUtil {
 
         List<String> lines = FileUtils233.readLines(logFile, StandardCharsets.UTF_8);
         return lines.stream()
-                .map(line -> LogFormatUtil.lineFormatMapping(line, keywordTemplates, toSplitRegexExpression, isNeedTranslate))
+                .map(line -> TextFormatUtils233.lineFormatMapping(line, keywordTemplates, toSplitRegexExpression, isNeedTranslate))
                 .collect(Collectors.toList());
     }
 
@@ -95,7 +95,7 @@ public class LogFormatUtil {
         List<String> contentList = Arrays.asList(line.split(toSplitTranslateExpression));
 
         List<String> keywordList = keywordTemplateList.stream()
-                .map(LogFormatUtil::getKeywordFromPlaceHolder)
+                .map(TextFormatUtils233::getKeywordFromPlaceHolder)
                 .collect(Collectors.toList());
 
         // 生成映射结果
