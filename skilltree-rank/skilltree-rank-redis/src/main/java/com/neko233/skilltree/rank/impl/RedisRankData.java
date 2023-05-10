@@ -2,11 +2,13 @@ package com.neko233.skilltree.rank.impl;
 
 import com.neko233.skilltree.rank.RankData;
 
-public class RedisRankData<UID extends Comparable<UID>>
-        implements RankData<UID> {
+import java.rmi.server.UID;
+
+public class RedisRankData
+        implements RankData {
 
     @Override
-    public UID getId() {
+    public String getId() {
         return null;
     }
 

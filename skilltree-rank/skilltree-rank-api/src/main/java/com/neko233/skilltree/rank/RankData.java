@@ -8,16 +8,14 @@ package com.neko233.skilltree.rank;
  * 3. 创建时间
  * 排名数据, 不应该考虑排名, 排名是从【宏观角度】观察的一个维度
  * </code>
- *
- * @param <UID> 用户标识
  */
-public interface RankData<UID> {
+public interface RankData {
 
 
     /**
      * @return userId / username
      */
-    UID getId();
+    String getId();
 
 
     /**

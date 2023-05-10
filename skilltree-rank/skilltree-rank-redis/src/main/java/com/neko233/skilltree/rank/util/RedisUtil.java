@@ -14,7 +14,7 @@ public class RedisUtil {
 
     private static StatefulRedisConnection<String, String> connection;
 
-    public static RedisCommands init() {
+    public static RedisCommands<String, String> init() {
         clientResources = DefaultClientResources.create();
         redisClient = RedisClient.create(clientResources, "redis://127.0.0.1:6379");
         connection = redisClient.connect();

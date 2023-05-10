@@ -1,33 +1,33 @@
 package com.neko233.skilltree.rank;
 
-import com.neko233.skilltree.rank.impl.RedisRankData;
+public class UserData implements RankData {
 
-public class UserData extends RedisRankData<UserData> implements Comparable<UserData> {
-
-    private String userID;
+    private String userId;
     private long score;
     private long createTime;
 
     public UserData() {
     }
 
-    public UserData(String userID, long score, long createTime) {
-        this.userID = userID;
+    public UserData(String userID,
+                    long score,
+                    long createTime) {
+        this.userId = userID;
         this.score = score;
         this.createTime = createTime;
     }
 
-    public void setUserID(String userID) {
-        this.userID = userID;
+    public void setUserId(String userId) {
+        this.userId = userId;
     }
 
-    public String getUserID() {
-        return userID;
+    public String getUserId() {
+        return userId;
     }
 
     @Override
-    public UserData getId() {
-        return this;
+    public String getId() {
+        return userId;
     }
 
     @Override
@@ -47,10 +47,5 @@ public class UserData extends RedisRankData<UserData> implements Comparable<User
 
     public void setCreateTime(long createTime) {
         this.createTime = createTime;
-    }
-
-    @Override
-    public int compareTo(UserData o) {
-        return 0;
     }
 }
