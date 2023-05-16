@@ -1,5 +1,6 @@
 package com.neko233.skilltree.commons.core.dataStruct.bit;
 
+import com.neko233.skilltree.commons.dataStruct.bit.BitMap;
 import org.junit.Test;
 
 /**

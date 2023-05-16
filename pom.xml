@@ -7,7 +7,7 @@
 
     <groupId>com.neko233</groupId>
     <artifactId>neko233-skilltree</artifactId>
-    <version>0.0.3</version>
+    <version>0.0.4</version>
 
 
     <name>neko233-toolchain-all</name>
@@ -26,9 +26,11 @@
         <module>skilltree-commons-reactive</module>
         <module>skilltree-commons-event-system</module>
         <module>skilltree-commons-storage</module>
+        <module>skilltree-datetime</module>
 
         <!-- 功能层 -->
         <module>skilltree-aop</module>
+        <module>skilltree-ioc</module>
         <module>skilltree-actor</module>
         <module>skilltree-counter</module>
         <module>skilltree-id-generator</module>
@@ -36,6 +38,7 @@
         <module>skilltree-distribute-system</module>
         <module>skilltree-memory-database</module>
         <module>skilltree-validator</module>
+        <module>skilltree-scheduler</module>
     </modules>
 
     <description>
