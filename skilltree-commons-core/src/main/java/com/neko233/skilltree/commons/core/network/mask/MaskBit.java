@@ -1,6 +1,6 @@
 package com.neko233.skilltree.commons.core.network.mask;
 
-import com.neko233.skilltree.commons.core.dataStruct.maps.BiDirectionalMap;
+import com.neko233.skilltree.commons.dataStruct.maps.BiDirectionalMap;
 
 /**
  * 掩码位和掩码之间的Map对应

@@ -9,7 +9,7 @@
 	<parent>
 		<groupId>com.neko233</groupId>
 		<artifactId>neko233-skilltree</artifactId>
-		<version>0.0.3</version>
+		<version>0.0.4</version>
 	</parent>
 
 	<artifactId>skilltree-all</artifactId>
@@ -31,9 +31,91 @@
 		</dependency>
 		<dependency>
 			<groupId>com.neko233</groupId>
+			<artifactId>skilltree-commons-sql</artifactId>
+			<version>${project.parent.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>com.neko233</groupId>
+			<artifactId>skilltree-commons-api</artifactId>
+			<version>${project.parent.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>com.neko233</groupId>
+			<artifactId>skilltree-commons-parser</artifactId>
+			<version>${project.parent.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>com.neko233</groupId>
+			<artifactId>skilltree-commons-metrics</artifactId>
+			<version>${project.parent.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>com.neko233</groupId>
+			<artifactId>skilltree-commons-reactive</artifactId>
+			<version>${project.parent.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>com.neko233</groupId>
+			<artifactId>skilltree-commons-event-system</artifactId>
+			<version>${project.parent.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>com.neko233</groupId>
+			<artifactId>skilltree-commons-storage</artifactId>
+			<version>${project.parent.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>com.neko233</groupId>
+			<artifactId>skilltree-datetime</artifactId>
+			<version>${project.parent.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>com.neko233</groupId>
 			<artifactId>skilltree-aop</artifactId>
 			<version>${project.parent.version}</version>
 		</dependency>
+		<dependency>
+			<groupId>com.neko233</groupId>
+			<artifactId>skilltree-ioc</artifactId>
+			<version>${project.parent.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>com.neko233</groupId>
+			<artifactId>skilltree-actor</artifactId>
+			<version>${project.parent.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>com.neko233</groupId>
+			<artifactId>skilltree-counter</artifactId>
+			<version>${project.parent.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>com.neko233</groupId>
+			<artifactId>skilltree-id-generator</artifactId>
+			<version>${project.parent.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>com.neko233</groupId>
+			<artifactId>skilltree-distribute-system</artifactId>
+			<version>${project.parent.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>com.neko233</groupId>
+			<artifactId>skilltree-memory-database</artifactId>
+			<version>${project.parent.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>com.neko233</groupId>
+			<artifactId>skilltree-validator</artifactId>
+			<version>${project.parent.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>com.neko233</groupId>
+			<artifactId>skilltree-scheduler</artifactId>
+			<version>${project.parent.version}</version>
+		</dependency>
+
+
 	</dependencies>
 
 	<build>

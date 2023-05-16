@@ -1,8 +1,8 @@
 package com.neko233.skilltree.commons.core.base;
 
 import com.neko233.skilltree.commons.core.annotation.ThreadSafe;
-import com.neko233.skilltree.commons.core.dataStruct.objects.Pair;
-import com.neko233.skilltree.commons.core.dataStruct.objects.Tuple3;
+import com.neko233.skilltree.commons.dataStruct.objects.Pair;
+import com.neko233.skilltree.commons.dataStruct.objects.Tuple3;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 

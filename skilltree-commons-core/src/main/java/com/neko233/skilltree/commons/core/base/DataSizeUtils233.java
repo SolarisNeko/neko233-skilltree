@@ -1,6 +1,6 @@
 package com.neko233.skilltree.commons.core.base;
 
-import com.neko233.skilltree.commons.core.dataStruct.maps.BiDirectionalMap;
+import com.neko233.skilltree.commons.dataStruct.maps.BiDirectionalMap;
 import com.neko233.skilltree.commons.core.pool.DataSizePool;
 
 import java.math.BigDecimal;

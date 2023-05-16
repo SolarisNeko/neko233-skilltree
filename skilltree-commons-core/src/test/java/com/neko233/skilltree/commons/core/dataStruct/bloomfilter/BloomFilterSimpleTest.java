@@ -1,5 +1,6 @@
 package com.neko233.skilltree.commons.core.dataStruct.bloomfilter;
 
+import com.neko233.skilltree.commons.dataStruct.bloomfilter.BloomFilterSimple;
 import org.junit.Before;
 import org.junit.Test;
 

@@ -1,6 +1,6 @@
 package com.neko233.skilltree.commons.core.business;
 
-import com.neko233.skilltree.commons.core.dataStruct.bloomfilter.BloomFilterSimple;
+import com.neko233.skilltree.commons.dataStruct.bloomfilter.BloomFilterSimple;
 import lombok.extern.slf4j.Slf4j;
 
 import java.util.*;
