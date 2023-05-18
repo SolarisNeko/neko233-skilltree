@@ -1,7 +1,7 @@
 package com.neko233.skilltree.ioc.provider;
 
-import com.neko233.skilltree.ioc.annotation.Component;
-import com.neko233.skilltree.ioc.constant.ComponentType;
+import com.neko233.skilltree.ioc.annotation.Provider;
+import com.neko233.skilltree.ioc.constant.ProvideType;
 import lombok.Data;
 
 import java.util.concurrent.atomic.AtomicInteger;
@@ -9,7 +9,7 @@ import java.util.concurrent.atomic.AtomicInteger;
 /**
  * @author SolarisNeko on 2023-05-01
  **/
-@Component(componentType = ComponentType.SINGLETON)
+@Provider(type = ProvideType.SINGLETON)
 @Data
 public class ProviderBySingleton {
 

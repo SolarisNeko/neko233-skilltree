@@ -1,9 +1,9 @@
 package com.neko233.skilltree.ioc.provider;
 
-import com.neko233.skilltree.ioc.annotation.Component;
+import com.neko233.skilltree.ioc.annotation.Provider;
 import com.neko233.skilltree.ioc.api.IocDemoApi;
 
-@Component
+@Provider
 public class IocDemoApiImpl implements IocDemoApi {
     @Override
     public String sayHello() {

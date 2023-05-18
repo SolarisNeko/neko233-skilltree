@@ -3,9 +3,9 @@ package com.neko233.skilltree.ioc;
 import com.neko233.skilltree.commons.core.base.InterfaceUtils233;
 import com.neko233.skilltree.commons.core.base.StringUtils233;
 import com.neko233.skilltree.commons.core.scanner.PackageScanner;
-import com.neko233.skilltree.ioc.annotation.Component;
+import com.neko233.skilltree.ioc.annotation.Provider;
 import com.neko233.skilltree.ioc.annotation.Inject;
-import com.neko233.skilltree.ioc.constant.ComponentType;
+import com.neko233.skilltree.ioc.constant.ProvideType;
 import com.neko233.skilltree.ioc.object_factory.ObjectFactory;
 import com.neko233.skilltree.ioc.object_factory.PrototypeObjectFactory;
 import com.neko233.skilltree.ioc.object_factory.SingletonObjectFactory;
@@ -137,16 +137,16 @@ public class IocContainer233 {
         for (String beanClassName : classNameList) {
             Class<?> clazz = Class.forName(beanClassName);
 
-            Component annotation = clazz.getAnnotation(Component.class);
+            Provider annotation = clazz.getAnnotation(Provider.class);
             if (annotation == null) {
                 continue;
             }
-            ComponentType componentType = annotation.componentType();
+            ProvideType provideType = annotation.type();
             ObjectFactory objectFactory = null;
-            if (componentType == ComponentType.SINGLETON) {
+            if (provideType == ProvideType.SINGLETON) {
                 objectFactory = new SingletonObjectFactory(clazz);
             }
-            if (componentType == ComponentType.PROTOTYPE) {
+            if (provideType == ProvideType.PROTOTYPE) {
                 objectFactory = new PrototypeObjectFactory(clazz);
             }
 
