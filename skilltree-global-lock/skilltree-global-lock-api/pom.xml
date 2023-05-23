@@ -7,7 +7,7 @@
     <parent>
         <groupId>com.neko233</groupId>
         <artifactId>skilltree-global-lock</artifactId>
-        <version>0.0.4</version>
+        <version>0.0.5</version>
     </parent>
 
     <artifactId>skilltree-global-lock-api</artifactId>
@@ -19,12 +19,6 @@
     </properties>
 
     <dependencies>
-        <!-- 高性能 -->
-        <dependency>
-            <groupId>cglib</groupId>
-            <artifactId>cglib</artifactId>
-            <version>3.3.0</version>
-        </dependency>
 
 
         <dependency>

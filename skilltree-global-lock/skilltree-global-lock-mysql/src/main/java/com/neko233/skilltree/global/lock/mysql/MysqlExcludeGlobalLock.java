@@ -1,6 +1,6 @@
 package com.neko233.skilltree.global.lock.mysql;
 
-import com.neko233.skilltree.global.lock.AbstractLock;
+import com.neko233.skilltree.global.lock.GlobalLock;
 import com.neko233.skilltree.global.lock.mysql.utils.JdbcHelper;
 import lombok.extern.slf4j.Slf4j;
 
@@ -16,7 +16,7 @@ import java.util.concurrent.TimeUnit;
  * 不可重入锁, exclude Lock 排他
  */
 @Slf4j
-public class MysqlExcludeGlobalLock implements AbstractLock {
+public class MysqlExcludeGlobalLock implements GlobalLock {
 
     public static final String CREATE_TABLE_SQL = "create table if not exists neko233_global_lock_by_exclude ( " +
             "  id int unsigned auto_increment primary key, " +

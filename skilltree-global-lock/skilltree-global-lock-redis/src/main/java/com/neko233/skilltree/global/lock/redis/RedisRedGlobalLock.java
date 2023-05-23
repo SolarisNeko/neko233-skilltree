@@ -1,6 +1,6 @@
 package com.neko233.skilltree.global.lock.redis;
 
-import com.neko233.skilltree.global.lock.AbstractLock;
+import com.neko233.skilltree.global.lock.GlobalLock;
 import org.redisson.RedissonRedLock;
 
 import java.util.concurrent.TimeUnit;
@@ -11,14 +11,14 @@ import java.util.concurrent.locks.Condition;
  *
  * @author SolarisNeko
  */
-public class RedisRedLock implements AbstractLock {
+public class RedisRedGlobalLock implements GlobalLock {
 
     private RedissonRedLock redLock;
 
-    private RedisRedLock() {
+    private RedisRedGlobalLock() {
     }
 
-    public RedisRedLock(RedissonRedLock redLock) {
+    public RedisRedGlobalLock(RedissonRedLock redLock) {
         this.redLock = redLock;
     }
 

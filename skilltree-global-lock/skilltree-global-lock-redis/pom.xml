@@ -7,7 +7,7 @@
     <parent>
         <groupId>com.neko233</groupId>
         <artifactId>skilltree-global-lock</artifactId>
-        <version>0.0.4</version>
+        <version>0.0.5</version>
     </parent>
 
     <artifactId>skilltree-global-lock-redis</artifactId>
@@ -29,6 +29,12 @@
 
         <dependency>
             <groupId>com.neko233</groupId>
+            <artifactId>skilltree-global-lock-api</artifactId>
+            <version>${parent.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>com.neko233</groupId>
             <artifactId>skilltree-commons-core</artifactId>
             <version>${project.parent.version}</version>
         </dependency>
@@ -37,12 +43,6 @@
             <groupId>org.projectlombok</groupId>
             <artifactId>lombok</artifactId>
             <version>${lombok.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>com.neko233</groupId>
-            <artifactId>skilltree-global-lock-api</artifactId>
-            <version>0.0.4</version>
-            <scope>compile</scope>
         </dependency>
 
 

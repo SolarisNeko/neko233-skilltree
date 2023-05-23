@@ -1,6 +1,6 @@
 package com.neko233.skilltree.global.lock.redis;
 
-import com.neko233.skilltree.global.lock.AbstractLock;
+import com.neko233.skilltree.global.lock.GlobalLock;
 import org.redisson.api.RLock;
 import org.redisson.api.RedissonClient;
 
@@ -12,13 +12,13 @@ import java.util.concurrent.locks.Condition;
  *
  * @author SolarisNeko on 2023-05-01
  */
-public class RedisLock implements AbstractLock {
+public class RedisGlobalLock implements GlobalLock {
 
     private final RedissonClient redissonClient;
     private final String key;
 
-    public RedisLock(RedissonClient redissonClient,
-                     String key) {
+    public RedisGlobalLock(RedissonClient redissonClient,
+                           String key) {
         this.redissonClient = redissonClient;
         this.key = key;
     }

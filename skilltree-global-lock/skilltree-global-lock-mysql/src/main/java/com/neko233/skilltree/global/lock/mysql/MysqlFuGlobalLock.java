@@ -1,6 +1,6 @@
 package com.neko233.skilltree.global.lock.mysql;
 
-import com.neko233.skilltree.global.lock.AbstractLock;
+import com.neko233.skilltree.global.lock.GlobalLock;
 import com.neko233.skilltree.global.lock.mysql.utils.JdbcHelper;
 import lombok.SneakyThrows;
 import lombok.extern.slf4j.Slf4j;
@@ -19,7 +19,7 @@ import java.util.concurrent.TimeUnit;
  * FU 锁，可重入基于行锁，不支持行锁的无效或锁表，支持阻塞和非阻塞
  */
 @Slf4j
-public class MysqlFuGlobalLock implements AbstractLock {
+public class MysqlFuGlobalLock implements GlobalLock {
 
     public static final String CREATE_TABLE_SQL = " * create table if not exists neko233_global_lock_by_fu ( " +
             "  id int unsigned auto_increment primary key, " +

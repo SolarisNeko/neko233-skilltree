@@ -5,12 +5,13 @@ import io.etcd.jetcd.Lease;
 /**
  * 心跳续约线程类
  */
-public class KeepAliveRunnable implements Runnable {
+public class EtcdKeepAliveRunnable implements Runnable {
+
     private final Lease leaseClient;
     private final long leaseId;
 
-    public KeepAliveRunnable(Lease leaseClient,
-                             long leaseId) {
+    public EtcdKeepAliveRunnable(Lease leaseClient,
+                                 long leaseId) {
         this.leaseClient = leaseClient;
         this.leaseId = leaseId;
     }

@@ -8,7 +8,7 @@ import java.util.concurrent.locks.Lock;
  * @author SolarisNeko on  2020-01-01
  * @version V1.0
  */
-public interface AbstractLock extends Lock {
+public interface GlobalLock extends Lock {
 
 
     default void lock() {

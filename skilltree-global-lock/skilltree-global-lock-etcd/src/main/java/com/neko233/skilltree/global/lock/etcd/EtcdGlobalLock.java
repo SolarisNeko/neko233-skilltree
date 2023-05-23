@@ -1,7 +1,7 @@
 package com.neko233.skilltree.global.lock.etcd;
 
 import com.google.common.collect.Maps;
-import com.neko233.skilltree.global.lock.AbstractLock;
+import com.neko233.skilltree.global.lock.GlobalLock;
 import com.neko233.skilltree.global.lock.etcd.dto.EtcdLockData;
 import io.etcd.jetcd.ByteSequence;
 import io.etcd.jetcd.Client;
@@ -22,7 +22,7 @@ import java.util.concurrent.atomic.AtomicInteger;
  */
 @Slf4j
 @Data
-public class EtcdGlobalLock implements AbstractLock {
+public class EtcdGlobalLock implements GlobalLock {
 
     private Client client;
     private Lock lockClient;
@@ -37,7 +37,7 @@ public class EtcdGlobalLock implements AbstractLock {
     /**
      * 租约有效期,防止客户端崩溃，可在租约到期后自动释放锁；另一方面，正常执行过程中，会自动进行续租,单位 ns
      */
-    private Long leaseTTL;
+    private Long leaseTtl;
     /**
      * 续约锁租期的定时任务，初次启动延迟，单位默认为 s,默认为1s，可根据业务定制设置
      */
@@ -56,14 +56,14 @@ public class EtcdGlobalLock implements AbstractLock {
 
     public EtcdGlobalLock(Client client,
                           String lockKey,
-                          long leaseTTL,
+                          long leaseTtl,
                           TimeUnit unit) {
         this.client = client;
         lockClient = client.getLockClient();
         leaseClient = client.getLeaseClient();
         this.lockKey = lockKey;
         // 转纳秒
-        this.leaseTTL = unit.toNanos(leaseTTL);
+        this.leaseTtl = unit.toNanos(leaseTtl);
         scheduler = Executors.newSingleThreadScheduledExecutor();
     }
 
@@ -85,12 +85,12 @@ public class EtcdGlobalLock implements AbstractLock {
         // 记录租约 ID
         long leaseId = 0L;
         try {
-            leaseId = leaseClient.grant(TimeUnit.NANOSECONDS.toSeconds(leaseTTL)).get().getID();
+            leaseId = leaseClient.grant(TimeUnit.NANOSECONDS.toSeconds(leaseTtl)).get().getID();
             // 续租心跳周期
-            long period = leaseTTL - leaseTTL / 5;
+            long period = leaseTtl - leaseTtl / 5;
 
             // 启动定时任务续约
-            KeepAliveRunnable runnable = new KeepAliveRunnable(leaseClient, leaseId);
+            EtcdKeepAliveRunnable runnable = new EtcdKeepAliveRunnable(leaseClient, leaseId);
             scheduler.scheduleAtFixedRate(runnable, initialDelay, period, TimeUnit.NANOSECONDS);
 
             LockResponse lockResponse = lockClient.lock(ByteSequence.from(lockKey.getBytes()), leaseId).get();
