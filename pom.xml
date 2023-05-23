@@ -39,6 +39,7 @@
         <module>skilltree-memory-database</module>
         <module>skilltree-validator</module>
         <module>skilltree-scheduler</module>
+        <module>skilltree-global-lock</module>
     </modules>
 
     <description>
@@ -87,6 +88,10 @@
 
 
         <redis-lettuce.version>5.1.8.RELEASE</redis-lettuce.version>
+        <mysql-connector-java.version>8.0.33</mysql-connector-java.version>
+        <druid.version>1.2.17</druid.version>
+        <redission.version>3.8.2</redission.version>
+        <jetcd-core.version>0.7.5</jetcd-core.version>
     </properties>
 
     <dependencies>
