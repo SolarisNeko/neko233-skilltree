@@ -7,7 +7,7 @@
 
     <groupId>com.neko233</groupId>
     <artifactId>neko233-skilltree</artifactId>
-    <version>0.0.5</version>
+    <version>0.0.6</version>
 
 
     <name>neko233-toolchain-all</name>
@@ -83,7 +83,7 @@
 
         <!-- plugin -->
         <lombok.version>1.18.24</lombok.version>
-        <!-- Log -->
+        <datetime233.version>0.0.8</datetime233.version>
         <slf4j-api.version>1.7.36</slf4j-api.version>
 
 

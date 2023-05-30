@@ -1,4 +1,4 @@
-package com.neko233.skilltree.commons.core.compress.huffman;
+package com.neko233.skilltree.commons.compress.huffman;
 
 import java.nio.charset.StandardCharsets;
 import java.util.*;

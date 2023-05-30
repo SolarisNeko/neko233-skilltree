@@ -1,9 +1,12 @@
 package com.neko233.skilltree.commons.core.base;
 
+import org.apache.commons.lang3.ArrayUtils;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Objects;
+import java.util.stream.Collectors;
 
 /**
  * @author SolarisNeko
@@ -49,26 +52,34 @@ public class ListUtils233 {
     }
 
     /**
-     * 联合
-     * @param listList 列表
-     * @return 联合后的列表
-     * @param <T>
+     * 合并 n 个 list
+     *
+     * @param list 多个数组
+     * @param <T>  泛型
+     * @return 新的 list
      */
-    public static <T> List<T> union(List<T>... listList) {
-        if (listList == null) {
-            return ListUtils233.of();
+    @SafeVarargs
+    public static <T> List<T> union(final List<T>... list) {
+        final List<T> result = new ArrayList<>();
+        if (ArrayUtils.isEmpty(list)) {
+            return result;
         }
-        int sum = Arrays.stream(listList)
-                .filter(Objects::nonNull)
-                .mapToInt(List::size)
-                .sum();
-        final List<T> arrayList = new ArrayList<>(sum);
-        for (List<T> list : listList) {
-            if (list == null) {
-                continue;
-            }
-            arrayList.addAll(list);
+        for (List<T> ts : list) {
+            result.addAll(ts);
         }
-        return arrayList;
+        return result;
+    }
+
+
+    @SafeVarargs
+    public static <T> List<T> unionNotNull(final List<T>... list) {
+        final List<T> result = new ArrayList<>();
+        if (ArrayUtils.isEmpty(list)) {
+            return result;
+        }
+        for (List<T> ts : list) {
+            result.addAll(ts);
+        }
+        return result.stream().filter(Objects::nonNull).collect(Collectors.toList());
     }
 }

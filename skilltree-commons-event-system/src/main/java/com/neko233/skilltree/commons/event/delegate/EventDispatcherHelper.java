@@ -17,7 +17,7 @@ public class EventDispatcherHelper {
      */
     public static void registerByMethodInPackageScan(EventDispatcher dispatcher,
                                                      String packageName) {
-        Set<Class<?>> classes = PackageScanner.listClazz(packageName, true, EventListener.class::isAssignableFrom);
+        Set<Class<?>> classes = PackageScanner.scanClass(packageName, true, EventListener.class::isAssignableFrom);
         for (Class<?> eventListenerImpl : classes) {
             if (eventListenerImpl.isInterface()) {
                 continue;

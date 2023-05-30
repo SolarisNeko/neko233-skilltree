@@ -1,4 +1,4 @@
-package com.neko233.skilltree.commons.core.compress.huffman;
+package com.neko233.skilltree.commons.compress.huffman;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;

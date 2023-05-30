@@ -1,8 +1,10 @@
 package com.neko233.skilltree.commons.core.file;
 
 
+import com.neko233.skilltree.commons.core.annotation.Out;
 import com.neko233.skilltree.commons.core.base.CollectionUtils233;
 import com.neko233.skilltree.commons.core.base.DataSizeUtils233;
+import com.neko233.skilltree.commons.core.base.RegexUtils233;
 import com.neko233.skilltree.commons.core.file.visitor.FileVisitorForAccumulate;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.io.IOExceptionList;
@@ -29,13 +31,17 @@ import java.util.stream.Stream;
 @Slf4j
 public class FileUtils233 {
 
-    public static List<String> readLines(final File file, final Charset charset) throws IOException {
+    public static final String PROJECT_HOME = "${app.projectHome}";
+
+    public static List<String> readLines(final File file,
+                                         final Charset charset) throws IOException {
         try (InputStream inputStream = openInputStream(file)) {
             return readLines(inputStream, chooseCharset(charset));
         }
     }
 
-    public static List<String> readLines(final InputStream input, final Charset charset) throws IOException {
+    public static List<String> readLines(final InputStream input,
+                                         final Charset charset) throws IOException {
         final InputStreamReader reader = new InputStreamReader(input, chooseCharset(charset));
         return readLines(reader);
     }
@@ -93,30 +99,32 @@ public class FileUtils233 {
     /**
      * ClassLoader 加载 properties 文件
      *
-     * @param propsFilename
-     * @param archProps
-     * @param loader
-     * @return
+     * @param resourcesPropertyFileName resources/ 目录下的文件名
+     * @param properties                属性
+     * @param classLoader               类加载器
+     * @return 是否加载成功
      */
-    private static boolean readPropertiesFromClassLoader(String propsFilename, Properties archProps,
-                                                         ClassLoader loader) {
-        if (loader == null) {
+    private static boolean readPropertiesFromClassLoader(String resourcesPropertyFileName,
+                                                         @Out Properties properties,
+                                                         ClassLoader classLoader) {
+        if (classLoader == null) {
             return false;
         }
         // Load the configuration file from the classLoader
         try {
-            List<URL> resources = Collections.list(loader.getResources(propsFilename));
+            List<URL> resources = Collections.list(classLoader.getResources(resourcesPropertyFileName));
             if (resources.isEmpty()) {
-                log.debug("No {} file found from ClassLoader {}", propsFilename, loader);
+                log.debug("No {} file found from ClassLoader {}", resourcesPropertyFileName, classLoader);
                 return false;
             }
             if (resources.size() > 1) {
-                log.warn("Configuration conflict: there is more than one {} file on the classpath: {}", propsFilename,
+                log.warn("Configuration conflict: there is more than one {} file on the classpath: {}",
+                        resourcesPropertyFileName,
                         resources);
             }
             try (InputStream in = resources.get(0).openStream()) {
                 if (in != null) {
-                    archProps.load(in);
+                    properties.load(in);
                 }
             }
             return true;
@@ -130,7 +138,8 @@ public class FileUtils233 {
         return showFiles(fileOrDir, false, null);
     }
 
-    public static List<File> showFiles(final File fileOrDir, final boolean isRecursive) throws IOException {
+    public static List<File> showFiles(final File fileOrDir,
+                                       final boolean isRecursive) throws IOException {
         return showFiles(fileOrDir, isRecursive, null);
     }
 
@@ -143,7 +152,9 @@ public class FileUtils233 {
      * @return 纯文件 (不包含 dir)
      * @throws IOException
      */
-    public static List<File> showFiles(final File fileOrDir, final boolean isRecursive, final List<String> suffixes)
+    public static List<File> showFiles(final File fileOrDir,
+                                       final boolean isRecursive,
+                                       final List<String> suffixes)
             throws IOException {
         final List<String> suffixList = Optional.ofNullable(suffixes).orElse(new ArrayList<>());
 
@@ -189,7 +200,8 @@ public class FileUtils233 {
                 .collect(Collectors.toList());
     }
 
-    private static String getFileTreeString(File f, int level) {
+    private static String getFileTreeString(File f,
+                                            int level) {
         // 返回一个抽象路径名数组，这些路径名表示此抽象路径名所表示目录中地文件
         File[] childs = f.listFiles();
         StringBuilder fileTreeBuilder = new StringBuilder();
@@ -265,10 +277,21 @@ public class FileUtils233 {
      * @param newFile 新文件
      */
     public static boolean createFileIfNotExists(File newFile) throws IOException {
+
+        if (newFile == null) {
+            return false;
+        }
+        createAllParentDir(newFile);
+
         if (newFile.exists()) {
             return false;
         }
-        newFile.createNewFile();
+        try {
+            newFile.createNewFile();
+        } catch (IOException e) {
+            log.error("新文件创建失败. filePath = {}", newFile.getAbsolutePath());
+            throw new IOException(e);
+        }
         return true;
     }
 
@@ -276,7 +299,8 @@ public class FileUtils233 {
         return readAllContent(file, StandardCharsets.UTF_8);
     }
 
-    public static String readAllContent(File file, Charset charset) throws IOException {
+    public static String readAllContent(File file,
+                                        Charset charset) throws IOException {
         if (file == null || !file.exists()) {
             return null;
         }
@@ -286,7 +310,8 @@ public class FileUtils233 {
     }
 
 
-    public static void write(final File file, final CharSequence data) throws IOException {
+    public static void write(final File file,
+                             final CharSequence data) throws IOException {
         write(file, data, StandardCharsets.UTF_8);
     }
 
@@ -298,7 +323,9 @@ public class FileUtils233 {
      * @param charset 编码
      * @throws IOException
      */
-    public static void write(final File file, final CharSequence data, final Charset charset) throws IOException {
+    public static void write(final File file,
+                             final CharSequence data,
+                             final Charset charset) throws IOException {
         write(file, data, charset, true);
     }
 
@@ -312,7 +339,10 @@ public class FileUtils233 {
      *                end of the file rather than overwriting
      * @throws IOException in case of an I/O error
      */
-    public static void write(final File file, final CharSequence data, final Charset charset, final boolean append)
+    public static void write(final File file,
+                             final CharSequence data,
+                             final Charset charset,
+                             final boolean append)
             throws IOException {
         writeStringToFile(file, Objects.toString(data, null), charset, append);
     }
@@ -327,14 +357,17 @@ public class FileUtils233 {
      * @param append
      * @throws IOException
      */
-    public static void writeStringToFile(final File file, final String data, final Charset charset,
+    public static void writeStringToFile(final File file,
+                                         final String data,
+                                         final Charset charset,
                                          final boolean append) throws IOException {
         try (OutputStream out = openOutputStream(file, append)) {
             IoUtils233.write(data, out, charset);
         }
     }
 
-    public static FileOutputStream openOutputStream(final File file, final boolean append) throws IOException {
+    public static FileOutputStream openOutputStream(final File file,
+                                                    final boolean append) throws IOException {
         Objects.requireNonNull(file, "file");
         if (file.exists()) {
             requireFile(file, "file");
@@ -354,7 +387,8 @@ public class FileUtils233 {
      * @throws NullPointerException     if the given {@code File} is {@code null}.
      * @throws IllegalArgumentException if the given {@code File} does not exist or is not a directory.
      */
-    private static File requireFile(final File file, final String name) {
+    private static File requireFile(final File file,
+                                    final String name) {
         Objects.requireNonNull(file, name);
         if (!file.isFile()) {
             throw new IllegalArgumentException("Parameter '" + name + "' is not a file: " + file);
@@ -370,7 +404,8 @@ public class FileUtils233 {
      * @throws NullPointerException     if the given {@code File} is {@code null}.
      * @throws IllegalArgumentException if the file is not writable.
      */
-    private static void requireCanWrite(final File file, final String name) {
+    private static void requireCanWrite(final File file,
+                                        final String name) {
         Objects.requireNonNull(file, "file");
         if (!file.canWrite()) {
             throw new IllegalArgumentException("File parameter '" + name + " is not writable: '" + file + "'");
@@ -424,7 +459,8 @@ public class FileUtils233 {
      * @throws IOException in case of an I/O error
      * @since 1.3
      */
-    public static void writeLines(final File file, final Collection<?> lines) throws IOException {
+    public static void writeLines(final File file,
+                                  final Collection<?> lines) throws IOException {
         writeLines(file, null, lines, null, false);
     }
 
@@ -440,7 +476,9 @@ public class FileUtils233 {
      * @throws IOException in case of an I/O error
      * @since 2.1
      */
-    public static void writeLines(final File file, final Collection<?> lines, final boolean append) throws IOException {
+    public static void writeLines(final File file,
+                                  final Collection<?> lines,
+                                  final boolean append) throws IOException {
         writeLines(file, null, lines, null, append);
     }
 
@@ -455,7 +493,9 @@ public class FileUtils233 {
      * @throws IOException in case of an I/O error
      * @since 1.3
      */
-    public static void writeLines(final File file, final Collection<?> lines, final String lineEnding)
+    public static void writeLines(final File file,
+                                  final Collection<?> lines,
+                                  final String lineEnding)
             throws IOException {
         writeLines(file, null, lines, lineEnding, false);
     }
@@ -474,7 +514,9 @@ public class FileUtils233 {
      * @throws IOException in case of an I/O error
      * @since 2.1
      */
-    public static void writeLines(final File file, final Collection<?> lines, final String lineEnding,
+    public static void writeLines(final File file,
+                                  final Collection<?> lines,
+                                  final String lineEnding,
                                   final boolean append) throws IOException {
         writeLines(file, null, lines, lineEnding, append);
     }
@@ -491,11 +533,13 @@ public class FileUtils233 {
      * @param file        the file to write to
      * @param charsetName the name of the requested charset, {@code null} means platform default
      * @param lines       the lines to write, {@code null} entries produce blank lines
-     * @throws IOException                          in case of an I/O error
+     * @throws IOException                  in case of an I/O error
      * @throws UnsupportedEncodingException if the encoding is not supported by the VM
      * @since 1.1
      */
-    public static void writeLines(final File file, final String charsetName, final Collection<?> lines)
+    public static void writeLines(final File file,
+                                  final String charsetName,
+                                  final Collection<?> lines)
             throws IOException {
         writeLines(file, charsetName, lines, null, false);
     }
@@ -510,11 +554,13 @@ public class FileUtils233 {
      * @param lines       the lines to write, {@code null} entries produce blank lines
      * @param append      if {@code true}, then the lines will be added to the
      *                    end of the file rather than overwriting
-     * @throws IOException                          in case of an I/O error
+     * @throws IOException                  in case of an I/O error
      * @throws UnsupportedEncodingException if the encoding is not supported by the VM
      * @since 2.1
      */
-    public static void writeLines(final File file, final String charsetName, final Collection<?> lines,
+    public static void writeLines(final File file,
+                                  final String charsetName,
+                                  final Collection<?> lines,
                                   final boolean append) throws IOException {
         writeLines(file, charsetName, lines, null, append);
     }
@@ -532,11 +578,13 @@ public class FileUtils233 {
      * @param charsetName the name of the requested charset, {@code null} means platform default
      * @param lines       the lines to write, {@code null} entries produce blank lines
      * @param lineEnding  the line separator to use, {@code null} is system default
-     * @throws IOException                          in case of an I/O error
+     * @throws IOException                  in case of an I/O error
      * @throws UnsupportedEncodingException if the encoding is not supported by the VM
      * @since 1.1
      */
-    public static void writeLines(final File file, final String charsetName, final Collection<?> lines,
+    public static void writeLines(final File file,
+                                  final String charsetName,
+                                  final Collection<?> lines,
                                   final String lineEnding) throws IOException {
         writeLines(file, charsetName, lines, lineEnding, false);
     }
@@ -552,7 +600,7 @@ public class FileUtils233 {
      * @param lineEnding  the line separator to use, {@code null} is system default
      * @param append      if {@code true}, then the lines will be added to the
      *                    end of the file rather than overwriting
-     * @throws IOException                          in case of an I/O error
+     * @throws IOException                  in case of an I/O error
      * @throws UnsupportedEncodingException if the encoding is not supported by the VM
      */
     public static void writeLines(final File file,
@@ -618,7 +666,8 @@ public class FileUtils233 {
         }
     }
 
-    public static void iterateLines(File file, Consumer<String> lineConsumer) throws IOException {
+    public static void iterateLines(File file,
+                                    Consumer<String> lineConsumer) throws IOException {
         //创建类进行文件的读取，并指定编码格式为utf-8
         InputStreamReader read = new InputStreamReader(Files.newInputStream(file.toPath()), StandardCharsets.UTF_8);
         BufferedReader in = new BufferedReader(read);//可用于读取指定文件
@@ -632,6 +681,7 @@ public class FileUtils233 {
 
     /**
      * 文件是否空白 = not exists / blank
+     *
      * @param fileAbsolutePath 目标文件全路径
      * @return isBlank
      */
@@ -644,5 +694,50 @@ public class FileUtils233 {
             return true;
         }
         return false;
+    }
+
+
+    public static File createFileX(String pathGrammar) throws IOException {
+        File file = newFileX(pathGrammar);
+        if (file == null) {
+            return null;
+        }
+        if (file.exists()) {
+            return file;
+        }
+        createAllParentDir(file);
+        file.createNewFile();
+        return file;
+    }
+
+    /**
+     * 创建文件 | 使用 [neko233 自定义语法, Like linux-style] 做了 File 操作增强
+     *
+     * @param pathGrammar 路径语法
+     * @return 文件
+     */
+    public static File newFileX(String pathGrammar) {
+        String path = pathGrammar;
+
+
+        // "~/" == 为家目录
+        if (path.contains("~")) {
+            // 获取用户的家目录
+            String userHome = System.getProperty("user.home");
+            String unixPath = userHome.replaceAll("\\\\", "/");
+            path = path.replaceFirst("^~", unixPath);
+        }
+
+        // ${app.projectHome} == 项目目录
+        if (path.contains(PROJECT_HOME)) {
+            String projectHome = System.getProperty("user.dir");
+            String unixPath = projectHome.replaceAll("\\\\", "/");
+            String regexText = RegexUtils233.convertTextForNotRegex(PROJECT_HOME);
+            path = path.replaceFirst(regexText, unixPath);
+        }
+
+
+        // 创建文件对象
+        return new File(path);
     }
 }

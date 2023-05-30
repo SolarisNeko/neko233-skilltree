@@ -37,7 +37,7 @@ public class ValidateApiFactory {
      * @param classPath 类路径
      */
     public static void registerByScanPackage(String classPath) {
-        Set<Class<?>> classes = PackageScanner.listClazz(classPath, true, ValidateApi.class::isAssignableFrom);
+        Set<Class<?>> classes = PackageScanner.scanClass(classPath, true, ValidateApi.class::isAssignableFrom);
         for (Class<?> clazz : classes) {
             if (!ValidateApi.class.isAssignableFrom(clazz)) {
                 continue;

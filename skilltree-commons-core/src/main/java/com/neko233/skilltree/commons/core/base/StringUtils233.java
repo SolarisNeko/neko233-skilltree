@@ -65,8 +65,6 @@ public class StringUtils233 {
      */
     private static final String EMPTY_JSON = "{}";
 
-    private StringUtils233() {
-    }
 
     /**
      * 安全 trim

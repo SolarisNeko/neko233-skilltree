@@ -1,4 +1,4 @@
-package com.neko233.skilltree.commons.core.compress.punch_date;
+package com.neko233.skilltree.commons.compress.punch_date;
 
 import com.neko233.skilltree.commons.core.base.StringUtils233;
 
@@ -15,7 +15,8 @@ import java.util.stream.Collectors;
 
 /**
  * 打卡日期压缩记录.
- * 将 10000 行记录, 压缩成一行. disk -> cpu
+ * 将 10000 行记录, 压缩成一行. <br>
+ * 节省 I/O -> 消耗 cpu
  *
  * @author SolarisNeko on 2023-02-18
  **/

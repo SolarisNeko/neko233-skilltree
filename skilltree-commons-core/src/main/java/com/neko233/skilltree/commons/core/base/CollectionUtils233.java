@@ -5,8 +5,6 @@ import java.util.stream.Collectors;
 
 public class CollectionUtils233 {
 
-    private CollectionUtils233() {
-    }
 
     public static boolean isEmpty(final Collection<?> collection) {
         return collection == null || collection.isEmpty();

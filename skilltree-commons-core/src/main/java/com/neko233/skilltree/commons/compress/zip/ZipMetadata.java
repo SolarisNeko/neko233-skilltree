@@ -1,4 +1,4 @@
-package com.neko233.skilltree.commons.core.compress.zip;
+package com.neko233.skilltree.commons.compress.zip;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;

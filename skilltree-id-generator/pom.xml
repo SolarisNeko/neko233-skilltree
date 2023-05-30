@@ -7,7 +7,7 @@
     <parent>
         <groupId>com.neko233</groupId>
         <artifactId>neko233-skilltree</artifactId>
-        <version>0.0.5</version>
+        <version>0.0.6</version>
     </parent>
 
     <artifactId>skilltree-id-generator</artifactId>
@@ -49,7 +49,7 @@
         <dependency>
             <groupId>com.neko233</groupId>
             <artifactId>skilltree-commons-sql</artifactId>
-            <version>0.0.5</version>
+            <version>0.0.6</version>
             <scope>compile</scope>
         </dependency>
     </dependencies>

@@ -27,12 +27,20 @@ public final class PackageScanner {
      * @param superClazz  父类的类型
      * @return 子类集合
      */
-    static public Set<Class<?>> listSubClazz(String packageName, boolean recursive, Class<?> superClazz) {
+    static public Set<Class<?>> scanSubClazz(String packageName,
+                                             boolean recursive,
+                                             Class<?> superClazz) {
         if (superClazz == null) {
             return Collections.emptySet();
         } else {
-            return listClazz(packageName, recursive, superClazz::isAssignableFrom);
+            return scanClass(packageName, recursive, superClazz::isAssignableFrom);
         }
+    }
+
+
+    static public Set<Class<?>> scanClass(String packageName,
+                                          boolean recursive) {
+        return scanClass(packageName, recursive, (clazz -> true));
     }
 
     /**
@@ -40,14 +48,12 @@ public final class PackageScanner {
      *
      * @param packageName 包名称
      * @param recursive   是否递归查找?
-     * @param filter      过滤器
+     * @param filter      类过滤器
      * @return 符合条件的类集合
      */
-    static public Set<Class<?>> listClazz(String packageName, boolean recursive) {
-        return listClazz(packageName, recursive, (clazz -> true));
-    }
-
-    static public Set<Class<?>> listClazz(String packageName, boolean recursive, ClassFilter filter) {
+    static public Set<Class<?>> scanClass(String packageName,
+                                          boolean recursive,
+                                          ClassFilter filter) {
 
         if (packageName == null ||
                 packageName.isEmpty()) {
@@ -76,7 +82,7 @@ public final class PackageScanner {
 
                 if ("FILE".equalsIgnoreCase(protocol)) {
                     // 从文件系统中加载类
-                    tmpSet = listClazzFromDir(
+                    tmpSet = scanClassFromDir(
                             new File(currUrl.getFile()), packageName, recursive, filter
                     );
                 } else if ("JAR".equalsIgnoreCase(protocol)) {
@@ -96,7 +102,7 @@ public final class PackageScanner {
                     }
 
                     // 从 JAR 文件中加载类
-                    tmpSet = listClazzFromJar(
+                    tmpSet = scanClassFromJar(
                             new File(fileStr), packageName, recursive, filter
                     );
                 }
@@ -124,8 +130,11 @@ public final class PackageScanner {
      * @param filter      类过滤器
      * @return 符合条件的类集合
      */
-    static private Set<Class<?>> listClazzFromDir(
-            final File dirFile, final String packageName, final boolean recursive, ClassFilter filter) {
+    static private Set<Class<?>> scanClassFromDir(
+            final File dirFile,
+            final String packageName,
+            final boolean recursive,
+            ClassFilter filter) {
 
         if (!dirFile.exists() ||
                 !dirFile.isDirectory()) {
@@ -222,8 +231,11 @@ public final class PackageScanner {
      * @param filter      类过滤器
      * @return 符合条件的类集合
      */
-    static private Set<Class<?>> listClazzFromJar(
-            final File jarFilePath, final String packageName, final boolean recursive, ClassFilter filter) {
+    static private Set<Class<?>> scanClassFromJar(
+            final File jarFilePath,
+            final String packageName,
+            final boolean recursive,
+            ClassFilter filter) {
 
         if (jarFilePath == null ||
                 jarFilePath.isDirectory()) {
@@ -308,10 +320,11 @@ public final class PackageScanner {
      * 使用连接符连接字符串数组
      *
      * @param strArr 字符串数组
-     * @param conn   连接符
+     * @param joiner 连接符
      * @return 连接后的字符串
      */
-    static private String join(String[] strArr, String conn) {
+    static private String join(String[] strArr,
+                               String joiner) {
         if (null == strArr ||
                 strArr.length <= 0) {
             return "";
@@ -322,7 +335,7 @@ public final class PackageScanner {
         for (int i = 0; i < strArr.length; i++) {
             if (i > 0) {
                 // 添加连接符
-                sb.append(conn);
+                sb.append(joiner);
             }
 
             // 添加字符串
@@ -339,7 +352,8 @@ public final class PackageScanner {
      * @param trimStr 需要被清除的字符串
      * @return 清除后的字符串
      */
-    static private String trimLeft(String src, String trimStr) {
+    static private String trimLeft(String src,
+                                   String trimStr) {
         if (null == src ||
                 src.isEmpty()) {
             return "";
@@ -361,19 +375,5 @@ public final class PackageScanner {
         return src;
     }
 
-    /**
-     * 类名称过滤器
-     *
-     * @author hjj2019
-     */
-    @FunctionalInterface
-    static public interface ClassFilter {
-        /**
-         * 是否接受当前类?
-         *
-         * @param clazz 被筛选的类
-         * @return 是否符合条件
-         */
-        boolean accept(Class<?> clazz);
-    }
+
 }

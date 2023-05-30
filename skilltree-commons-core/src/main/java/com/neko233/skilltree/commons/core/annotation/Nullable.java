@@ -9,7 +9,7 @@ import java.lang.annotation.*;
  * Date on 2023-01-28
  */
 @Documented
-@Target({ElementType.TYPE, ElementType.METHOD, ElementType.PARAMETER, ElementType.FIELD})
+@Target({ElementType.LOCAL_VARIABLE, ElementType.TYPE, ElementType.METHOD, ElementType.PARAMETER, ElementType.FIELD})
 @Retention(RetentionPolicy.RUNTIME)
 public @interface Nullable {
 

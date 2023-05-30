@@ -7,7 +7,7 @@
     <parent>
         <groupId>com.neko233</groupId>
         <artifactId>neko233-skilltree</artifactId>
-        <version>0.0.5</version>
+        <version>0.0.6</version>
     </parent>
 
     <artifactId>skilltree-datetime</artifactId>
@@ -22,7 +22,7 @@
         <dependency>
             <groupId>com.neko233</groupId>
             <artifactId>datetime233</artifactId>
-            <version>0.0.8</version>
+            <version>${datetime233.version}</version>
         </dependency>
 
         <dependency>

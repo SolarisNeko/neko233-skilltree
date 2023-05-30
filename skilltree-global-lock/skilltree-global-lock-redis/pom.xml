@@ -7,7 +7,7 @@
     <parent>
         <groupId>com.neko233</groupId>
         <artifactId>skilltree-global-lock</artifactId>
-        <version>0.0.5</version>
+        <version>0.0.6</version>
     </parent>
 
     <artifactId>skilltree-global-lock-redis</artifactId>

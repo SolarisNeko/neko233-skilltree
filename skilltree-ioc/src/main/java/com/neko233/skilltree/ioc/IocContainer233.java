@@ -65,7 +65,7 @@ public class IocContainer233 {
      */
     public void scan(String packageName,
                      boolean recursive) throws Exception {
-        List<String> classNameList = PackageScanner.listClazz(packageName, recursive)
+        List<String> classNameList = PackageScanner.scanClass(packageName, recursive)
                 .stream()
                 .map(Class::getName)
                 .collect(Collectors.toList());

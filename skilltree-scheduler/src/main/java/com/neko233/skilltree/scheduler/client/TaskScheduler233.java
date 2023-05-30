@@ -54,7 +54,7 @@ public class TaskScheduler233 {
      */
     public void scanAppAndSchedule(Class<?> appClass) {
         Package aPackage = appClass.getPackage();
-        Set<Class<?>> taskClassList = PackageScanner.listClazz(aPackage.getName(), true, (clazz) -> {
+        Set<Class<?>> taskClassList = PackageScanner.scanClass(aPackage.getName(), true, (clazz) -> {
             return clazz.isAnnotationPresent(ScheduleTaskClass.class);
         });
 
