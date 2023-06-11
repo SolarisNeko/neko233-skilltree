@@ -7,8 +7,7 @@
 
     <groupId>com.neko233</groupId>
     <artifactId>neko233-skilltree</artifactId>
-    <version>0.0.6</version>
-
+    <version>0.0.7</version>
 
     <name>neko233-toolchain-all</name>
     <url>https://github.com/SolarisNeko/neko233-toolchain-all/tree/main</url>
@@ -19,14 +18,12 @@
 
         <!-- 通用层 -->
         <module>skilltree-commons-core</module>
-        <module>skilltree-commons-sql</module>
         <module>skilltree-commons-api</module>
         <module>skilltree-commons-parser</module>
         <module>skilltree-commons-metrics</module>
         <module>skilltree-commons-reactive</module>
         <module>skilltree-commons-event-system</module>
         <module>skilltree-commons-storage</module>
-        <module>skilltree-datetime</module>
 
         <!-- 功能层 -->
         <module>skilltree-aop</module>
@@ -83,8 +80,9 @@
 
         <!-- plugin -->
         <lombok.version>1.18.24</lombok.version>
-        <datetime233.version>0.0.8</datetime233.version>
+        <datetime233.version>1.0.1</datetime233.version>
         <slf4j-api.version>1.7.36</slf4j-api.version>
+        <neko233-json-java.version>0.0.1</neko233-json-java.version>
 
 
         <redis-lettuce.version>5.1.8.RELEASE</redis-lettuce.version>

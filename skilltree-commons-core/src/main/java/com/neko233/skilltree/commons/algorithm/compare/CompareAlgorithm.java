@@ -14,7 +14,8 @@ import java.util.function.Function;
 import java.util.stream.Collectors;
 
 /**
- * 通用对比算法
+ * 通用对比算法 <br>
+ * ps: 需要比较的对象 T 需要实现 Compare
  *
  * @author LuoHaoJun on 2023-05-01
  **/
@@ -85,13 +86,13 @@ public class CompareAlgorithm {
 
         List<T> noChangedList = oldDataMap.entrySet().stream()
                 .filter(entry -> newDataMap.containsKey(entry.getKey()))
-                .filter(entry -> entry.getValue().equals(newDataMap.get(entry.getKey())))
+                .filter(entry -> entry.getValue().isEquals(newDataMap.get(entry.getKey())))
                 .map(Map.Entry::getValue)
                 .collect(Collectors.toList());
 
         List<T> toUpdateList = newDataMap.entrySet().stream()
                 .filter(entry -> oldDataMap.containsKey(entry.getKey()))
-                .filter(entry -> !entry.getValue().equals(oldDataMap.get(entry.getKey())))
+                .filter(entry -> !entry.getValue().isEquals(oldDataMap.get(entry.getKey())))
                 .map(Map.Entry::getValue)
                 .collect(Collectors.toList());
 

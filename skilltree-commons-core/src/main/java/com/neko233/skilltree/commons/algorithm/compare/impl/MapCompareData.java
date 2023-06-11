@@ -5,10 +5,7 @@ import com.neko233.skilltree.commons.core.base.ListUtils233;
 import com.neko233.skilltree.commons.core.base.MapUtils233;
 import lombok.Data;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
-import java.util.Optional;
+import java.util.*;
 import java.util.stream.Collectors;
 
 /**
@@ -20,6 +17,19 @@ public class MapCompareData implements CompareDataApi {
     private Map<String, Object> dataMap;
     private List<String> primaryKeyList;
 
+    public static MapCompareData of(Map<String, Object> map
+    ) {
+        List<String> primaryKeyList = map.keySet().stream().sorted().collect(Collectors.toList());
+        return of(map, primaryKeyList);
+    }
+
+    /**
+     * 构造对比数据结构
+     *
+     * @param map        数据
+     * @param primaryKey Map 中唯一的 key column[]
+     * @return 对比的数据结构
+     */
     public static MapCompareData of(Map<String, Object> map,
                                     List<String> primaryKey) {
         MapCompareData data = new MapCompareData();
@@ -34,5 +44,10 @@ public class MapCompareData implements CompareDataApi {
         return primaryKeyList.stream()
                 .map(pk -> dataMap.get(pk))
                 .collect(Collectors.toList());
+    }
+
+    @Override
+    public boolean isEquals(Object other) {
+        return Objects.equals(this, other);
     }
 }

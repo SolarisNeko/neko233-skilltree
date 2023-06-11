@@ -24,4 +24,6 @@ public interface CompareDataApi {
 
     List<Object> primaryKeyList();
 
+    boolean isEquals(Object obj);
+
 }

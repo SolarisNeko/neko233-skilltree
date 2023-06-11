@@ -27,7 +27,6 @@ public class AllModuleGenerator {
                 "        <module>skilltree-commons-reactive</module>\n" +
                 "        <module>skilltree-commons-event-system</module>\n" +
                 "        <module>skilltree-commons-storage</module>\n" +
-                "        <module>skilltree-datetime</module>\n" +
                 "\n" +
                 "        <!-- 功能层 -->\n" +
                 "        <module>skilltree-aop</module>\n" +

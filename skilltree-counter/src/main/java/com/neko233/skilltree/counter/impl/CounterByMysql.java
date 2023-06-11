@@ -1,9 +1,10 @@
 package com.neko233.skilltree.counter.impl;
 
 import com.neko233.skilltree.commons.core.base.CollectionUtils233;
+import com.neko233.skilltree.commons.sql.SqlTemplate233;
 import com.neko233.skilltree.counter.Counter;
 import com.neko233.skilltree.counter.CounterData;
-import com.neko233.skilltree.sql.SqlTemplate;
+
 import lombok.extern.slf4j.Slf4j;
 
 import javax.sql.DataSource;
@@ -181,7 +182,7 @@ public class CounterByMysql implements Counter {
             PreparedStatement ps;
             int updateCount = 0;
             for (CounterData data : collect) {
-                String sql = SqlTemplate.builder(UPSERT_SQL)
+                String sql = SqlTemplate233.builder(UPSERT_SQL)
                         .put("id", data.getId())
                         .put("type", data.getType())
                         .put("cnt", String.valueOf(data.getCount() == null ? 0 : data.getCount().longValue()))

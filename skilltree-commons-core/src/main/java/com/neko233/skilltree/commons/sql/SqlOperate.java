@@ -1,11 +1,11 @@
-package com.neko233.skilltree.sql;
+package com.neko233.skilltree.commons.sql;
 
 /**
  * SQL 操作符
  *
  * @author SolarisNeko on 2022-01-01
  **/
-public enum SqlOperation {
+public enum SqlOperate {
 
     // =
     EQ,

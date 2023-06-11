@@ -1,8 +1,9 @@
-package com.neko233.skilltree.sql;
+package com.neko233.skilltree.commons.sql;
 
 
-import com.alibaba.fastjson2.JSON;
+import com.neko233.json.JSON;
 import com.neko233.skilltree.commons.core.base.StringUtils233;
+import com.neko233.skilltree.commons.json.JsonUtils233;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -12,14 +13,14 @@ import java.util.Map;
  *
  * @author SolarisNeko on 2022-08-01
  **/
-public class SqlTemplate {
+public class SqlTemplate233 {
 
     private static final String SQL_INJECT_REGEX = ".*(exec|insert|select|delete|drop|update|count|%|chr|mid|master|truncate|char|declare|;) .*";
 
     private final String sqlTemplate;
     private final Map<String, String> kvMap = new HashMap<>();
 
-    public SqlTemplate(String sqlTemplate) {
+    public SqlTemplate233(String sqlTemplate) {
         this.sqlTemplate = sqlTemplate;
     }
 
@@ -27,23 +28,48 @@ public class SqlTemplate {
         return sql.toLowerCase().matches(SQL_INJECT_REGEX);
     }
 
-    public static SqlTemplate builder(String sqlTemplate) {
+    public static SqlTemplate233 builder(String sqlTemplate) {
         if (StringUtils233.isBlank(sqlTemplate)) {
             throw new RuntimeException("your sql template is blank !");
         }
-        return new SqlTemplate(sqlTemplate);
+        return new SqlTemplate233(sqlTemplate);
     }
 
-    public SqlTemplate put(String key, Object value) {
+    public SqlTemplate233 put(String key,
+                              Object value) {
         kvMap.put(key, translateValue(value, false));
         return this;
     }
 
-    public SqlTemplate putAll(Map<String, Object> kvMap) {
+
+    /**
+     * set kv
+     *
+     * @param key        key
+     * @param value      value
+     * @param isOriginal 是否原始值
+     * @return this
+     */
+    public SqlTemplate233 put(String key,
+                              Object value,
+                              boolean isOriginal) {
+        kvMap.put(key, translateValue(value, isOriginal));
+        return this;
+    }
+
+    public SqlTemplate233 putAll(Map<String, Object> kvMap) {
         return putAll(kvMap, false);
     }
 
-    public SqlTemplate putAll(Map<String, Object> kvMap, boolean isOriginal) {
+    /**
+     * set kv
+     *
+     * @param kvMap      key-value map
+     * @param isOriginal 是否原始值
+     * @return this
+     */
+    public SqlTemplate233 putAll(Map<String, Object> kvMap,
+                                 boolean isOriginal) {
         for (Map.Entry<String, Object> en : kvMap.entrySet()) {
             this.kvMap.put(en.getKey(), translateValue(en.getValue(), isOriginal));
         }
@@ -54,7 +80,8 @@ public class SqlTemplate {
         return translateValue(valueObj, false);
     }
 
-    public String translateValue(Object valueObj, boolean isOriginal) {
+    public String translateValue(Object valueObj,
+                                 boolean isOriginal) {
         String value;
         if (isOriginal) {
             return String.valueOf(valueObj);
@@ -67,11 +94,14 @@ public class SqlTemplate {
         return value;
     }
 
-    public SqlTemplate merge(String key, Object value) {
+    public SqlTemplate233 merge(String key,
+                                Object value) {
         return merge(key, value, "");
     }
 
-    public SqlTemplate merge(String key, Object value, String union) {
+    public SqlTemplate233 merge(String key,
+                                Object value,
+                                String union) {
         kvMap.merge(key, translateValue(value), (v1, v2) -> v1 + union + v2);
         return this;
     }
@@ -81,14 +111,15 @@ public class SqlTemplate {
     }
 
     @Override
-    public String toString() throws IllegalArgumentException {
+    public String toString() {
         String tempSql = sqlTemplate;
         // 替换全部
         for (Map.Entry<String, String> kv : kvMap.entrySet()) {
             String value = kv.getValue();
-            if (isValueSqlInject(value)) {
-                String msg = String.format("[SqlTemplate] SQL Inject Error. Please check. sql Template = %s. kvMap = %s"
-                        , sqlTemplate, JSON.toJSONString(kvMap));
+            boolean isSqlInject = isValueSqlInject(value);
+            if (isSqlInject) {
+                String msg = StringUtils233.format("[SqlTemplate] SQL Inject Error. Please check. sql Template = {}. kvMap = {}"
+                        , sqlTemplate, JsonUtils233.toJsonString(kvMap));
                 throw new IllegalArgumentException(msg);
             }
             tempSql = tempSql.replaceAll(

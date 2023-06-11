@@ -740,4 +740,24 @@ public class FileUtils233 {
         // 创建文件对象
         return new File(path);
     }
+
+
+    /**
+     * 获取文件的相对路径
+     *
+     * @param fileAbsolutePath 文件完整路径
+     * @param parentPath       父级路径
+     * @return 相对路径
+     */
+    public static String getFileRelativePathList(String fileAbsolutePath,
+                                                 String parentPath) {
+        fileAbsolutePath = fileAbsolutePath.replaceAll("\\\\", "/");
+        parentPath = parentPath.replaceAll("\\\\", "/");
+
+        if (fileAbsolutePath.startsWith(parentPath)) {
+            return fileAbsolutePath.substring(parentPath.length() + 1);
+        }
+        return fileAbsolutePath;
+    }
+
 }

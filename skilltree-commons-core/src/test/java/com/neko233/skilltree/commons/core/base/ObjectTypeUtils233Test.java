@@ -47,7 +47,6 @@ public class ObjectTypeUtils233Test {
         Assert.assertEquals(String.class, clazz);
     }
 
-
     public static class MockGenericData implements MockGenericApi<Integer, String> {
         @Override
         public String getData(String data) {

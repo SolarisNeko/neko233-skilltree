@@ -9,7 +9,7 @@
     <parent>
         <groupId>com.neko233</groupId>
         <artifactId>neko233-skilltree</artifactId>
-        <version>0.0.6</version>
+        <version>0.0.7</version>
     </parent>
 
     <artifactId>skilltree-all</artifactId>
@@ -24,14 +24,12 @@
     <url>https://github.com/looly/hutool</url>
 
     <dependencies>
+
+
+        <!-- 当前项目 -->
         <dependency>
             <groupId>com.neko233</groupId>
             <artifactId>skilltree-commons-core</artifactId>
-            <version>${project.parent.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>com.neko233</groupId>
-            <artifactId>skilltree-commons-sql</artifactId>
             <version>${project.parent.version}</version>
         </dependency>
         <dependency>
@@ -62,11 +60,6 @@
         <dependency>
             <groupId>com.neko233</groupId>
             <artifactId>skilltree-commons-storage</artifactId>
-            <version>${project.parent.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>com.neko233</groupId>
-            <artifactId>skilltree-datetime</artifactId>
             <version>${project.parent.version}</version>
         </dependency>
         <dependency>

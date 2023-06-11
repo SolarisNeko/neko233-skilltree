@@ -1,4 +1,4 @@
-package com.neko233.skilltree.sql;
+package com.neko233.skilltree.commons.sql;
 
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.collections4.CollectionUtils;
@@ -14,12 +14,12 @@ import java.util.stream.Collectors;
 @Slf4j
 public class ConditionGenerator {
 
-    public static String condition(String columnName, SqlOperation operation, Object value) {
+    public static String condition(String columnName, SqlOperate operation, Object value) {
         return condition(columnName, operation, value, true);
     }
 
     @SuppressWarnings("uncheck")
-    public static String condition(String columnName, SqlOperation operation, Object value, boolean addAnd) {
+    public static String condition(String columnName, SqlOperate operation, Object value, boolean addAnd) {
         String operateWithSpace = chooseSqlOperate(operation);
 
         String tempValue;
@@ -50,7 +50,7 @@ public class ConditionGenerator {
         }
 
         String sql;
-        if (Objects.equals(SqlOperation.IN, operation) || Objects.equals(SqlOperation.NOT_IN, operation)) {
+        if (Objects.equals(SqlOperate.IN, operation) || Objects.equals(SqlOperate.NOT_IN, operation)) {
             sql = columnName + operateWithSpace + "(" + tempValue + ")";
         } else {
             sql = columnName + operateWithSpace + tempValue;
@@ -63,23 +63,23 @@ public class ConditionGenerator {
         }
     }
 
-    private static void checkCollectionTypeByIn(SqlOperation operation, String operateWithSpace) {
-        if (Objects.equals(operation, SqlOperation.IN) || Objects.equals(operation, SqlOperation.NOT_IN)) {
+    private static void checkCollectionTypeByIn(SqlOperate operation, String operateWithSpace) {
+        if (Objects.equals(operation, SqlOperate.IN) || Objects.equals(operation, SqlOperate.NOT_IN)) {
             // ok, write hard
         } else {
             throw new RuntimeException(String.format("When your value type is Collection, SqlOperation must is 'in', 'not in'. your operation = %s", operateWithSpace));
         }
     }
 
-    public static String condition(String columnName, SqlOperation operation, Object... valueList) {
+    public static String condition(String columnName, SqlOperate operation, Object... valueList) {
         return condition(columnName, operation, Arrays.asList(valueList), true);
     }
 
-    public static String condition(String columnName, SqlOperation operation, Object[] valueList, boolean addAnd) {
+    public static String condition(String columnName, SqlOperate operation, Object[] valueList, boolean addAnd) {
         return condition(columnName, operation, Arrays.asList(valueList), addAnd);
     }
 
-    public static String condition(String columnName, SqlOperation operation, Collection<Object> valueList, boolean addAnd) {
+    public static String condition(String columnName, SqlOperate operation, Collection<Object> valueList, boolean addAnd) {
         if (CollectionUtils.isEmpty(valueList)) {
             log.error("<ConditionGenerator> you input empty value list for column name = {}", columnName);
             return "";
@@ -113,7 +113,7 @@ public class ConditionGenerator {
      * @param operation 操作符
      * @return 条件符号
      */
-    private static String chooseSqlOperate(SqlOperation operation) {
+    private static String chooseSqlOperate(SqlOperate operation) {
         switch (operation) {
             case EQ:
                 return " = ";
