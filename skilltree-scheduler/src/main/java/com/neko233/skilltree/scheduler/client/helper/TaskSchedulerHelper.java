@@ -1,6 +1,6 @@
 package com.neko233.skilltree.scheduler.client.helper;
 
-import com.neko233.skilltree.commons.core.annotation.NotNull;
+import com.neko233.skilltree.annotation.NotNull;
 import com.neko233.skilltree.scheduler.client.annotation.ScheduleTask;
 import org.apache.commons.lang3.StringUtils;
 

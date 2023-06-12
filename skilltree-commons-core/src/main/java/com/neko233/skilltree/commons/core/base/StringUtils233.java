@@ -1,20 +1,18 @@
 package com.neko233.skilltree.commons.core.base;
 
 
-import com.neko233.skilltree.commons.core.annotation.NotNull;
-import com.neko233.skilltree.commons.core.annotation.Nullable;
+import com.neko233.skilltree.annotation.NotNull;
+import com.neko233.skilltree.annotation.Nullable;
+import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.collections4.CollectionUtils;
-import org.apache.commons.lang3.StringUtils;
 
 import java.nio.ByteBuffer;
 import java.nio.charset.Charset;
 import java.nio.charset.StandardCharsets;
 import java.util.*;
-import java.util.logging.Logger;
 import java.util.stream.Collectors;
 
-import static java.util.logging.Level.WARNING;
-
+@Slf4j
 public class StringUtils233 {
 
 
@@ -114,11 +112,11 @@ public class StringUtils233 {
      * <p>Whitespace is defined by {@link Character#isWhitespace(char)}.</p>
      *
      * <pre>
-     * StringUtils.isNotBlank(null)      = false
-     * StringUtils.isNotBlank("")        = false
-     * StringUtils.isNotBlank(" ")       = false
-     * StringUtils.isNotBlank("bob")     = true
-     * StringUtils.isNotBlank("  bob  ") = true
+     * StringUtils233.isNotBlank(null)      = false
+     * StringUtils233.isNotBlank("")        = false
+     * StringUtils233.isNotBlank(" ")       = false
+     * StringUtils233.isNotBlank("bob")     = true
+     * StringUtils233.isNotBlank("  bob  ") = true
      * </pre>
      *
      * @param cs the CharSequence to check, may be null
@@ -136,7 +134,7 @@ public class StringUtils233 {
      * @return aaa -> Aaa
      */
     public static String firstWordUpperCase(String content) {
-        if (StringUtils.isBlank(content)) {
+        if (StringUtils233.isBlank(content)) {
             return content;
         }
         if (content.length() == 1) {
@@ -152,7 +150,7 @@ public class StringUtils233 {
      * @return AAa -> aAa
      */
     public static String firstWordLowerCase(String content) {
-        if (StringUtils.isBlank(content)) {
+        if (StringUtils233.isBlank(content)) {
             return content;
         }
         if (content.length() == 1) {
@@ -293,16 +291,16 @@ public class StringUtils233 {
      * maybe null
      *
      * <pre>
-     * StringUtils.substringBetween("wx[b]yz", "[", "]") = "b"
-     * StringUtils.substringBetween(null, *, *)          = null
-     * StringUtils.substringBetween(*, null, *)          = null
-     * StringUtils.substringBetween(*, *, null)          = null
-     * StringUtils.substringBetween("", "", "")          = ""
-     * StringUtils.substringBetween("", "", "]")         = null
-     * StringUtils.substringBetween("", "[", "]")        = null
-     * StringUtils.substringBetween("yabcz", "", "")     = ""
-     * StringUtils.substringBetween("yabcz", "y", "z")   = "abc"
-     * StringUtils.substringBetween("yabczyabcz", "y", "z")   = "abc"
+     * StringUtils233.substringBetween("wx[b]yz", "[", "]") = "b"
+     * StringUtils233.substringBetween(null, *, *)          = null
+     * StringUtils233.substringBetween(*, null, *)          = null
+     * StringUtils233.substringBetween(*, *, null)          = null
+     * StringUtils233.substringBetween("", "", "")          = ""
+     * StringUtils233.substringBetween("", "", "]")         = null
+     * StringUtils233.substringBetween("", "[", "]")        = null
+     * StringUtils233.substringBetween("yabcz", "", "")     = ""
+     * StringUtils233.substringBetween("yabcz", "y", "z")   = "abc"
+     * StringUtils233.substringBetween("yabczyabcz", "y", "z")   = "abc"
      * </pre>
      *
      * @param targetString the String containing the substring, may be null
@@ -946,13 +944,8 @@ public class StringUtils233 {
         try {
             return o.toString();
         } catch (Exception e) {
-            // Default toString() behavior - see Object.toString()
-            String objectToString =
-                    o.getClass().getName() + '@' + Integer.toHexString(System.identityHashCode(o));
-            // Logger is created inline with fixed name to avoid forcing Proguard to create another class.
-            Logger.getLogger("com.google.common.base.Strings")
-                    .log(WARNING, "Exception during lenientFormat for " + objectToString, e);
-            return "<" + objectToString + " threw " + e.getClass().getName() + ">";
+            log.error("lenient to string error. ", e);
+            return null;
         }
     }
 }

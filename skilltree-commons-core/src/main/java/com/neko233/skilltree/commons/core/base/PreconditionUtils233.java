@@ -1,7 +1,7 @@
 package com.neko233.skilltree.commons.core.base;
 
-import com.neko233.skilltree.commons.core.annotation.CanIgnoreReturnValue;
-import com.neko233.skilltree.commons.core.annotation.NotNull;
+import com.neko233.skilltree.annotation.CanIgnoreReturnValue;
+import com.neko233.skilltree.annotation.NotNull;
 
 
 /**

@@ -1,7 +1,7 @@
 package com.neko233.skilltree.commons.core.file;
 
 
-import com.neko233.skilltree.commons.core.annotation.Out;
+import com.neko233.skilltree.annotation.Out;
 import com.neko233.skilltree.commons.core.base.CollectionUtils233;
 import com.neko233.skilltree.commons.core.base.DataSizeUtils233;
 import com.neko233.skilltree.commons.core.base.RegexUtils233;

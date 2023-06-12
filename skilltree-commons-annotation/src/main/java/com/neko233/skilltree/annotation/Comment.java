@@ -1,4 +1,4 @@
-package com.neko233.skilltree.commons.core.annotation;
+package com.neko233.skilltree.annotation;
 
 import java.lang.annotation.*;
 
@@ -11,7 +11,7 @@ import java.lang.annotation.*;
 @Documented
 @Target({ElementType.TYPE, ElementType.METHOD, ElementType.PARAMETER, ElementType.FIELD})
 @Retention(RetentionPolicy.RUNTIME)
-public @interface Experimental {
+public @interface Comment {
 
-    String comment();
+    String value() default "";
 }

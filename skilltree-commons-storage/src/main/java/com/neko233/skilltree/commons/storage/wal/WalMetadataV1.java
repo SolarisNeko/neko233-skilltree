@@ -2,7 +2,7 @@ package com.neko233.skilltree.commons.storage.wal;
 
 import com.alibaba.fastjson2.JSON;
 import com.alibaba.fastjson2.JSONWriter;
-import com.neko233.skilltree.commons.core.annotation.NotNull;
+import com.neko233.skilltree.annotation.NotNull;
 import com.neko233.skilltree.commons.core.file.FileUtils233;
 import lombok.AllArgsConstructor;
 import lombok.Builder;

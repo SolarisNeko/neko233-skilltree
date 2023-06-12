@@ -10,7 +10,7 @@
         <version>0.0.8</version>
     </parent>
 
-    <artifactId>skilltree-id-generator</artifactId>
+    <artifactId>skilltree-commons-annotation</artifactId>
     <name>${project.artifactId}</name>
 
 
@@ -20,31 +20,11 @@
 
     <dependencies>
 
-        <!-- DataSource -->
-        <dependency>
-            <groupId>com.alibaba</groupId>
-            <artifactId>druid</artifactId>
-            <version>1.2.14</version>
-        </dependency>
-        <!-- JDBC -->
-        <dependency>
-            <groupId>mysql</groupId>
-            <artifactId>mysql-connector-java</artifactId>
-            <version>8.0.32</version>
-        </dependency>
-
-        <dependency>
-            <groupId>com.neko233</groupId>
-            <artifactId>skilltree-commons-core</artifactId>
-            <version>${project.parent.version}</version>
-        </dependency>
-
         <dependency>
             <groupId>org.projectlombok</groupId>
             <artifactId>lombok</artifactId>
             <version>${lombok.version}</version>
         </dependency>
-
 
 
     </dependencies>

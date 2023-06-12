@@ -1,6 +1,6 @@
 package com.neko233.skilltree.idGenerator;
 
-import com.neko233.skilltree.commons.core.annotation.Nullable;
+import com.neko233.skilltree.annotation.Nullable;
 
 import java.util.List;
 

@@ -1,6 +1,6 @@
 package com.neko233.skilltree.commons.event.delegate;
 
-import com.neko233.skilltree.commons.core.annotation.Nullable;
+import com.neko233.skilltree.annotation.Nullable;
 
 import java.util.concurrent.Future;
 import java.util.concurrent.FutureTask;

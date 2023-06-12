@@ -2,7 +2,7 @@ package com.neko233.skilltree.scheduler.client;
 
 import com.neko233.datetime.DateTime233;
 import com.neko233.datetime.cron.CronExpression;
-import com.neko233.skilltree.commons.core.annotation.NotNull;
+import com.neko233.skilltree.annotation.NotNull;
 import com.neko233.skilltree.commons.core.base.CollectionUtils233;
 import com.neko233.skilltree.commons.core.scanner.PackageScanner;
 import com.neko233.skilltree.scheduler.client.annotation.ScheduleTask;

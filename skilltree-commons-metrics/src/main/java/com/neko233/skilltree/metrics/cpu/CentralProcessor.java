@@ -1,8 +1,8 @@
 package com.neko233.skilltree.metrics.cpu;
 
 
-import com.neko233.skilltree.commons.core.annotation.Immutable;
-import com.neko233.skilltree.commons.core.annotation.ThreadSafe;
+import com.neko233.skilltree.annotation.Immutable;
+import com.neko233.skilltree.annotation.ThreadSafe;
 import com.neko233.skilltree.commons.core.base.*;
 import com.neko233.skilltree.commons.core.file.FileUtils233;
 

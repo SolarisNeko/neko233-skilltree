@@ -1,7 +1,7 @@
 package com.neko233.skilltree.actor;
 
 
-import com.neko233.skilltree.commons.core.annotation.Experimental;
+import com.neko233.skilltree.annotation.Experimental;
 import lombok.extern.slf4j.Slf4j;
 
 /**

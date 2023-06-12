@@ -1,10 +1,8 @@
 package com.neko233.skilltree.commons.parser.text;
 
 
-
-
-import com.neko233.skilltree.commons.core.annotation.NotNull;
 import com.neko233.skilltree.commons.core.file.FileUtils233;
+import org.jetbrains.annotations.NotNull;
 
 import java.io.File;
 import java.io.IOException;

@@ -1,6 +1,6 @@
 package com.neko233.skilltree.commons.core.base;
 
-import com.neko233.skilltree.commons.core.annotation.NotThreadSafe;
+import com.neko233.skilltree.annotation.NotThreadSafe;
 import com.neko233.skilltree.commons.core.file.FileUtils233;
 
 import java.util.Properties;

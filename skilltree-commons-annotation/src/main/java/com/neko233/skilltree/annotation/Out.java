@@ -1,4 +1,4 @@
-package com.neko233.skilltree.commons.core.annotation;
+package com.neko233.skilltree.annotation;
 
 import java.lang.annotation.Documented;
 import java.lang.annotation.Retention;

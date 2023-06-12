@@ -1,6 +1,6 @@
 package com.neko233.skilltree.commons.event;
 
-import com.neko233.skilltree.commons.core.annotation.Nullable;
+import com.neko233.skilltree.annotation.Nullable;
 import com.neko233.skilltree.commons.event.annotation.EventConsumer;
 
 import java.util.ArrayList;

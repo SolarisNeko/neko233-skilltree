@@ -2,7 +2,7 @@ package com.neko233.skilltree.commons.core.threadPool;
 
 
 
-import com.neko233.skilltree.commons.core.annotation.NotNull;
+import com.neko233.skilltree.annotation.NotNull;
 
 import java.util.concurrent.ThreadFactory;
 import java.util.concurrent.atomic.AtomicInteger;

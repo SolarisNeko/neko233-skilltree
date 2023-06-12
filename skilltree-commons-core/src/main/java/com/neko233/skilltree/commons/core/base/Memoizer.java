@@ -1,6 +1,6 @@
 package com.neko233.skilltree.commons.core.base;
 
-import com.neko233.skilltree.commons.core.annotation.ThreadSafe;
+import com.neko233.skilltree.annotation.ThreadSafe;
 
 import java.util.concurrent.TimeUnit;
 import java.util.function.Supplier;

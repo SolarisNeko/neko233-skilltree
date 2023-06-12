@@ -1,7 +1,7 @@
 package com.neko233.skilltree.commons.core.base;
 
-import com.neko233.skilltree.commons.core.annotation.MustImplement;
-import com.neko233.skilltree.commons.core.annotation.Nullable;
+import com.neko233.skilltree.annotation.MustImplement;
+import com.neko233.skilltree.annotation.Nullable;
 
 import java.lang.reflect.ParameterizedType;
 import java.lang.reflect.Type;

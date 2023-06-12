@@ -1,6 +1,5 @@
 package com.neko233.skilltree.commons.core.base;
 
-import org.apache.commons.lang3.StringUtils;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -27,7 +26,7 @@ public class KvTemplate233 {
     }
 
     public static KvTemplate233 builder(String kvTemplate) {
-        if (StringUtils.isBlank(kvTemplate)) {
+        if (StringUtils233.isBlank(kvTemplate)) {
             throw new RuntimeException("your kv template is blank !");
         }
         return new KvTemplate233(kvTemplate);
@@ -44,7 +43,7 @@ public class KvTemplate233 {
         return this;
     }
 
-    public KvTemplate233 put(Map<String, Object> kv) {
+    public KvTemplate233 put(Map<String, ? extends Object> kv) {
         if (kv == null) {
             return this;
         }

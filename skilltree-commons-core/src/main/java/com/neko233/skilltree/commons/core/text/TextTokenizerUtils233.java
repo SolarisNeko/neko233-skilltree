@@ -1,6 +1,6 @@
 package com.neko233.skilltree.commons.core.text;
 
-import com.neko233.skilltree.commons.core.annotation.NotNull;
+import com.neko233.skilltree.annotation.NotNull;
 import com.neko233.skilltree.commons.core.base.ListUtils233;
 import com.neko233.skilltree.commons.core.base.MapUtils233;
 import com.neko233.skilltree.commons.core.base.StringUtils233;

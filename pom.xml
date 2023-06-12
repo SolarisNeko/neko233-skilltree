@@ -7,7 +7,7 @@
 
     <groupId>com.neko233</groupId>
     <artifactId>neko233-skilltree</artifactId>
-    <version>0.0.7</version>
+    <version>0.0.8</version>
 
     <name>neko233-toolchain-all</name>
     <url>https://github.com/SolarisNeko/neko233-toolchain-all/tree/main</url>
@@ -17,6 +17,7 @@
         <module>skilltree-all</module>
 
         <!-- 通用层 -->
+        <module>skilltree-commons-annotation</module>
         <module>skilltree-commons-core</module>
         <module>skilltree-commons-api</module>
         <module>skilltree-commons-parser</module>
@@ -80,9 +81,9 @@
 
         <!-- plugin -->
         <lombok.version>1.18.24</lombok.version>
-        <datetime233.version>1.0.1</datetime233.version>
+        <datetime233.version>1.0.3</datetime233.version>
         <slf4j-api.version>1.7.36</slf4j-api.version>
-        <neko233-json-java.version>0.0.1</neko233-json-java.version>
+        <neko233-json-java.version>0.0.2</neko233-json-java.version>
 
 
         <redis-lettuce.version>5.1.8.RELEASE</redis-lettuce.version>
@@ -325,7 +326,7 @@
                             <serverId>ossrh</serverId>
                             <nexusUrl>https://s01.oss.sonatype.org/</nexusUrl>
                             <autoReleaseAfterClose>true</autoReleaseAfterClose>
-                            <stagingProgressTimeoutMinutes>60</stagingProgressTimeoutMinutes>
+                            <stagingProgressTimeoutMinutes>120</stagingProgressTimeoutMinutes>
                         </configuration>
                     </plugin>
 

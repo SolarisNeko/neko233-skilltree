@@ -1,7 +1,7 @@
 package com.neko233.skilltree.commons.storage.async_dao;
 
 
-import com.neko233.skilltree.commons.core.annotation.Experimental;
+import com.neko233.skilltree.annotation.Experimental;
 
 import java.util.ArrayList;
 import java.util.List;

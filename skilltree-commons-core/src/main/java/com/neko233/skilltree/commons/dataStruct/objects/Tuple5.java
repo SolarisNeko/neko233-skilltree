@@ -1,7 +1,7 @@
 package com.neko233.skilltree.commons.dataStruct.objects;
 
 
-import com.neko233.skilltree.commons.core.annotation.ThreadSafe;
+import com.neko233.skilltree.annotation.ThreadSafe;
 
 /**
  * 对向元组 3

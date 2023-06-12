@@ -59,11 +59,11 @@ public class MathTextCalculator233 {
     private static final String SPACE = "\\s";
 
 
-    public static BigDecimal executeExpressionByTemplate(String calExpressionTemplate, Map<String, Object> kvMap) throws Exception {
+    public static BigDecimal executeExpressionByTemplate(String calExpressionTemplate, Map<String, ? extends Number> kvMap) throws Exception {
         return executeExpressionByTemplate(calExpressionTemplate, kvMap, 2);
     }
 
-    public static BigDecimal executeExpressionByTemplate(String calExpressionTemplate, Map<String, Object> kvMap, int scaleSize) throws Exception {
+    public static BigDecimal executeExpressionByTemplate(String calExpressionTemplate, Map<String, ? extends Number> kvMap, int scaleSize) throws Exception {
         String calExpression = KvTemplate233.builder(calExpressionTemplate)
                 .put(kvMap)
                 .build();

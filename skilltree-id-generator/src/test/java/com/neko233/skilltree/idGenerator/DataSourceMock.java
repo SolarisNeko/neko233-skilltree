@@ -1,7 +1,7 @@
 package com.neko233.skilltree.idGenerator;
 
 import com.alibaba.druid.pool.DruidDataSourceFactory;
-import com.neko233.skilltree.commons.core.annotation.NotNull;
+import com.neko233.skilltree.annotation.NotNull;
 
 import javax.sql.DataSource;
 import java.sql.Connection;

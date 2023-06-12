@@ -1,6 +1,6 @@
 package com.neko233.skilltree.commons.core.cache.objects.impl;
 
-import com.neko233.skilltree.commons.core.annotation.ThreadNotSafe;
+import com.neko233.skilltree.annotation.ThreadNotSafe;
 
 import java.util.LinkedHashMap;
 import java.util.Map;

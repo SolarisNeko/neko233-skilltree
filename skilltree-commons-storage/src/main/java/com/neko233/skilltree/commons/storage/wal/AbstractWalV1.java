@@ -1,8 +1,8 @@
 package com.neko233.skilltree.commons.storage.wal;
 
 import com.alibaba.fastjson2.JSON;
-import com.neko233.skilltree.commons.core.annotation.Experimental;
-import com.neko233.skilltree.commons.core.annotation.NotNull;
+import com.neko233.skilltree.annotation.Experimental;
+import com.neko233.skilltree.annotation.NotNull;
 import com.neko233.skilltree.commons.core.base.*;
 import com.neko233.skilltree.commons.core.file.FileUtils233;
 import lombok.extern.slf4j.Slf4j;

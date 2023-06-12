@@ -1,7 +1,7 @@
 package com.neko233.skilltree.commons.dataStruct.bit;
 
 
-import com.neko233.skilltree.commons.core.annotation.NotNull;
+import com.neko233.skilltree.annotation.NotNull;
 
 import java.io.Serializable;
 import java.nio.charset.StandardCharsets;

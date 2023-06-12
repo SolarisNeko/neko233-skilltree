@@ -1,6 +1,6 @@
 package com.neko233.skilltree.commons.compress.zip;
 
-import com.neko233.skilltree.commons.core.annotation.Out;
+import com.neko233.skilltree.annotation.Out;
 import com.neko233.skilltree.commons.core.file.FileUtils233;
 import lombok.extern.slf4j.Slf4j;
 
